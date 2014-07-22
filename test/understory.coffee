@@ -22,7 +22,25 @@ describe 'understory', () ->
         find: "BOOK"
         replace: "child"
       understory.string_replace(info).should.equal('JUNGLE child')
+
   describe '#last_dash', () ->
     it 'Return part of string after the last dash (-).', () ->
       str = 'some-long-string-last-fun'
       understory.last_dash(str).should.equal('fun')
+
+  describe '#token_replace', () ->
+    value_obj =
+      action: 'DANCE!'
+      me: 'someone'
+    it 'Does a mustache replace on a string.', () ->
+      template_str = 'Kai is to {{action}}'
+      token_rep = understory.token_replace(template_str, value_obj)
+      token_rep.should.equal('Kai is to DANCE!')
+    it 'Does a mustache replace on an object.', () ->
+      template_obj =
+        one: 'replace {{me}}'
+        two:
+          three: 'Dance with {{me}} please.'
+      token_rep = understory.token_replace(template_obj, value_obj)
+      token_rep.one.should.equal('replace someone')
+      token_rep.two.three.should.equal('Dance with someone please.')

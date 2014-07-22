@@ -35,11 +35,36 @@ describe('understory', function() {
       return understory.string_replace(info).should.equal('JUNGLE child');
     });
   });
-  return describe('#last_dash', function() {
+  describe('#last_dash', function() {
     return it('Return part of string after the last dash (-).', function() {
       var str;
       str = 'some-long-string-last-fun';
       return understory.last_dash(str).should.equal('fun');
+    });
+  });
+  return describe('#token_replace', function() {
+    var value_obj;
+    value_obj = {
+      action: 'DANCE!',
+      me: 'someone'
+    };
+    it('Does a mustache replace on a string.', function() {
+      var template_str, token_rep;
+      template_str = 'Kai is to {{action}}';
+      token_rep = understory.token_replace(template_str, value_obj);
+      return token_rep.should.equal('Kai is to DANCE!');
+    });
+    return it('Does a mustache replace on an object.', function() {
+      var template_obj, token_rep;
+      template_obj = {
+        one: 'replace {{me}}',
+        two: {
+          three: 'Dance with {{me}} please.'
+        }
+      };
+      token_rep = understory.token_replace(template_obj, value_obj);
+      token_rep.one.should.equal('replace someone');
+      return token_rep.two.three.should.equal('Dance with someone please.');
     });
   });
 });
