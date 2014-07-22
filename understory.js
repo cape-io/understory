@@ -63,6 +63,9 @@ understory = {
   },
   string_replace: function(info) {
     var re, string;
+    if (info.value && _.isString(info.value)) {
+      info.string = info.value;
+    }
     string = info.string;
     if (!string) {
       return null;
@@ -70,32 +73,36 @@ understory = {
     if (info.toUpperCase) {
       string = string.toUpperCase();
     }
-    if (info.split_on) {
-      string = string.split(info.split_on);
-      _.forEach(string, function(value, i) {
-        if (info.trim) {
-          value = _.str.trim(value);
-        }
-        if (info.find_replace[value]) {
-          return string[i] = info.find_replace[value];
-        }
-      });
-    } else {
-      if (info.regex) {
-        if (!info.regex_options) {
-          info.regex_options = "g";
-        }
-        re = new RegExp(info.regex, info.regex_options);
-        string = string.replace(re, info.replace);
-      } else if (_.isObject(info.find_replace)) {
-        _.forEach(info.find_replace, function(new_value, old_value) {
-          return string = string.replace(old_value, new_value);
-        });
-      } else if (info.find && info.replace) {
-        string = string.replace(info.find, info.replace);
+    if (info.regex) {
+      if (!info.regex_options) {
+        info.regex_options = "g";
       }
+      re = new RegExp(info.regex, info.regex_options);
+      string = string.replace(re, info.replace);
+    } else if (_.isObject(info.find_replace)) {
+      _.forEach(info.find_replace, function(new_value, old_value) {
+        return string = string.replace(old_value, new_value);
+      });
+    } else if (info.find && info.replace) {
+      string = string.replace(info.find, info.replace);
     }
     return string;
+  },
+  array_replace: function(info) {
+    var _this = this;
+    if (!_.isArray(info.value)) {
+      return null;
+    }
+    if (!_.isObject(info.find_replace)) {
+      return null;
+    }
+    return _.map(info.value, function(arr_str) {
+      if (info.find_replace[arr_str]) {
+        return info.find_replace[arr_str];
+      } else {
+        return arr_str;
+      }
+    });
   },
   split: function(info) {
     var new_array, split_on, split_on_sub, string_to_split;
@@ -134,6 +141,15 @@ understory = {
   },
   last_dash: function(str) {
     return _.last(str.split('-'));
+  },
+  second: function(arr) {
+    return arr[1];
+  },
+  third: function(arr) {
+    return arr[2];
+  },
+  fourth: function(arr) {
+    return arr[3];
   }
 };
 

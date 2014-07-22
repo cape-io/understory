@@ -23,6 +23,27 @@ describe 'understory', () ->
         replace: "child"
       understory.string_replace(info).should.equal('JUNGLE child')
 
+    it 'Can do a bunch of find replace based on an `find_replace` property object. Can use `value` prop instead of `string`', () ->
+      info =
+        value: 'a D'
+        toUpperCase: true
+        find_replace:
+          A: 'Accessories'
+          D: 'Draperies'
+      understory.string_replace(info).should.equal('Accessories Draperies')
+
+  describe '#array_replace', () ->
+
+    it 'Replaces value of each array item if found in replace object.', () ->
+      info =
+        value: ['A', 'D', 'S', 'SC']
+        find_replace:
+          A: 'Accessories'
+          D: 'Draperies'
+          SC: 'Slip Covers'
+          S: 'Sheer'
+      understory.array_replace(info).should.eql(['Accessories', 'Draperies', 'Sheer', 'Slip Covers'])
+
   describe '#last_dash', () ->
     it 'Return part of string after the last dash (-).', () ->
       str = 'some-long-string-last-fun'

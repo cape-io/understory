@@ -24,7 +24,7 @@ describe('understory', function() {
       };
       return understory.string_replace(info).should.equal('Piqué');
     });
-    return it('Replaces based on `find` and `replace` props. Upper case before replace.', function() {
+    it('Replaces based on `find` and `replace` props. Upper case before replace.', function() {
       var info;
       info = {
         toUpperCase: true,
@@ -33,6 +33,33 @@ describe('understory', function() {
         replace: "child"
       };
       return understory.string_replace(info).should.equal('JUNGLE child');
+    });
+    return it('Can do a bunch of find replace based on an `find_replace` property object. Can use `value` prop instead of `string`', function() {
+      var info;
+      info = {
+        value: 'a D',
+        toUpperCase: true,
+        find_replace: {
+          A: 'Accessories',
+          D: 'Draperies'
+        }
+      };
+      return understory.string_replace(info).should.equal('Accessories Draperies');
+    });
+  });
+  describe('#array_replace', function() {
+    return it('Replaces value of each array item if found in replace object.', function() {
+      var info;
+      info = {
+        value: ['A', 'D', 'S', 'SC'],
+        find_replace: {
+          A: 'Accessories',
+          D: 'Draperies',
+          SC: 'Slip Covers',
+          S: 'Sheer'
+        }
+      };
+      return understory.array_replace(info).should.eql(['Accessories', 'Draperies', 'Sheer', 'Slip Covers']);
     });
   });
   describe('#last_dash', function() {
