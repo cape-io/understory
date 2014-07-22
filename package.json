@@ -1,14 +1,14 @@
 {
   "name": "understory",
-  "version": "0.1.1",
-  "description": "Add/Modify fields on an object based on a json configuration",
+  "version": "0.2.2",
+  "description": "Underscore + string mixin with some custom, frequently used functions.",
   "main": "understory.js",
   "scripts": {
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sundaysenergy/understory.git"
+    "url": "git://github.com/cape-io/understory.git"
   },
   "keywords": [
     "json",
@@ -18,11 +18,12 @@
   "author": "Kai Curry <kai@cape.io> (http://www.cape.io/)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sundaysenergy/understory/issues"
+    "url": "https://github.com/cape-io/understory/issues"
   },
-  "homepage": "https://github.com/sundaysenergy/understory",
+  "homepage": "https://github.com/cape-io/understory",
   "dependencies": {
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+    "hogan": "^1.0.2"
   },
   "devDependencies": {
     "mocha": "^1.20.1",

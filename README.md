@@ -1,1 +1,1 @@
-An underscore (lodash) mixin.
+Underscore (lodash) + string mixin with some custom, frequently used functions.
