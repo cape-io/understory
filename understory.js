@@ -44,7 +44,6 @@ understory = {
   token_replace: function(t, vars) {
     var _this = this;
     if (!_.isObject(vars)) {
-      console.log('NO vars sent to token_replace');
       return t;
     }
     if (_.isObject(t)) {
@@ -59,10 +58,6 @@ understory = {
       });
     } else if (_.isString(t)) {
       t = hogan.compile(t).render(vars);
-    } else {
-      console.log('NOT A STRING OR OBJECT for t in token_replace()');
-      console.log(t);
-      console.log(vars);
     }
     return t;
   },
@@ -101,6 +96,41 @@ understory = {
       }
     }
     return string;
+  },
+  split: function(info) {
+    var new_array, split_on, split_on_sub, string_to_split;
+    if (_.isString(info)) {
+      string_to_split = info;
+    } else if (info.string) {
+      string_to_split = info.string;
+    } else {
+      return null;
+    }
+    split_on = info.split_on || ' ';
+    split_on_sub = info.split_on_sub || false;
+    if (!string_to_split || _.isEmpty(string_to_split)) {
+      return null;
+    }
+    if (split_on_sub && !_.contains(string_to_split, split_on)) {
+      split_on = split_on_sub;
+    }
+    new_array = string_to_split.split(split_on);
+    if (_.isEmpty(_.compact(new_array))) {
+      return null;
+    }
+    if (info.trim) {
+      new_array = _.map(new_array, function(arr_val) {
+        return _.str.trim(arr_val);
+      });
+    }
+    if (info.index) {
+      if (new_array[info.index]) {
+        return new_array[info.index];
+      } else {
+        return null;
+      }
+    }
+    return new_array;
   },
   last_dash: function(str) {
     return _.last(str.split('-'));

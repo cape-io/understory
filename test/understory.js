@@ -42,7 +42,7 @@ describe('understory', function() {
       return understory.last_dash(str).should.equal('fun');
     });
   });
-  return describe('#token_replace', function() {
+  describe('#token_replace', function() {
     var value_obj;
     value_obj = {
       action: 'DANCE!',
@@ -65,6 +65,67 @@ describe('understory', function() {
       token_rep = understory.token_replace(template_obj, value_obj);
       token_rep.one.should.equal('replace someone');
       return token_rep.two.three.should.equal('Dance with someone please.');
+    });
+  });
+  return describe('#split', function() {
+    it('Does a default split on a string on spaces.', function() {
+      return understory.split('one two').should.eql(['one', 'two']);
+    });
+    it('When sent an object `string` is require or returns null', function() {
+      var result;
+      result = understory.split({
+        split_on: ' '
+      });
+      return should.equal(result, null);
+    });
+    it('Return empty array as null', function() {
+      var result;
+      result = understory.split({
+        string: 'a',
+        split_on: 'a'
+      });
+      return should.equal(result, null);
+    });
+    it('When string has extra space return it as expected.', function() {
+      var result;
+      result = understory.split(' something  two ');
+      return result.should.eql(['', 'something', '', 'two', '']);
+    });
+    it('Allows an object with string property. If split_on not found use split_on_sub.', function() {
+      var result;
+      result = understory.split({
+        string: 'something , two',
+        split_on: '5',
+        split_on_sub: ' , '
+      });
+      return result.should.eql(['something', 'two']);
+    });
+    it('Trims each result when trim prop is truthy.', function() {
+      var result;
+      result = understory.split({
+        string: 'something , two',
+        split_on: ',',
+        trim: true
+      });
+      return result.should.eql(['something', 'two']);
+    });
+    it('Returns value of single index when found.', function() {
+      var result;
+      result = understory.split({
+        string: 'something,two',
+        split_on: ',',
+        index: 1
+      });
+      return result.should.equal('two');
+    });
+    return it('Returns null when no key of index is found.', function() {
+      var result;
+      result = understory.split({
+        string: 'something,two',
+        split_on: ',',
+        index: 2
+      });
+      return should.equal(result, null);
     });
   });
 });

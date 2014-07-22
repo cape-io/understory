@@ -34,8 +34,9 @@ understory =
   token_replace: (t, vars) ->
     # vars must be an object of values that gets sent to mustache.
     unless _.isObject vars
-      console.log 'NO vars sent to token_replace'
-      return t # Can't replace anything return with original.
+      # Can't replace anything return with original.
+      # console.log 'NO vars sent to token_replace'
+      return t
 
     # Loop through all the values in 't' and apply mustache to them.
     if _.isObject t
@@ -48,10 +49,10 @@ understory =
           return str
     else if _.isString t
       t = hogan.compile(t).render(vars)
-    else
-      console.log 'NOT A STRING OR OBJECT for t in token_replace()'
-      console.log t
-      console.log vars
+    # else
+    #   console.log 'NOT A STRING OR OBJECT for t in token_replace()'
+    #   console.log t
+    #   console.log vars
     return t
 
   string_replace: (info) ->
@@ -80,6 +81,44 @@ understory =
       else if info.find and info.replace
         string = string.replace info.find, info.replace
     return string
+
+  # Split string into array based on ' '
+  split: (info) ->
+    if _.isString info
+      string_to_split = info
+    else if info.string
+      string_to_split = info.string
+    else
+      return null
+
+    split_on = info.split_on or ' '
+    split_on_sub = info.split_on_sub or false
+
+    if not string_to_split or _.isEmpty string_to_split
+      return null
+
+    if split_on_sub and not _.contains(string_to_split, split_on)
+      split_on = split_on_sub
+
+    new_array = string_to_split.split(split_on)
+
+    # Return empty arrays as null.
+    if _.isEmpty(_.compact(new_array))
+      return null
+
+    # Optionally trim each value.
+    if info.trim
+      new_array = _.map new_array, (arr_val) ->
+        # Not sure why this needs to be a func like this and not a direct map.
+        return _.str.trim(arr_val)
+
+    if info.index
+      if new_array[info.index]
+        return new_array[info.index]
+      else
+        return null
+
+    return new_array
 
   last_dash: (str) ->
     _.last str.split('-')
