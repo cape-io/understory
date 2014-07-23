@@ -33,7 +33,6 @@ describe 'understory', () ->
       understory.string_replace(info).should.equal('Accessories Draperies')
 
   describe '#array_replace', () ->
-
     it 'Replaces value of each array item if found in replace object.', () ->
       info =
         value: ['A', 'D', 'S', 'SC']
@@ -90,3 +89,59 @@ describe 'understory', () ->
     it 'Returns null when no key of index is found.', () ->
       result = understory.split({string: 'something,two', split_on: ',', index: 2})
       should.equal(result, null);
+
+  describe '#rename', () ->
+    it 'Renames props of an object based on another.', () ->
+      source =
+        itch: 'yes'
+        knee: 'no'
+        sun: 'sure'
+        she: 'always'
+      rename_obj =
+        knee: 'toe'
+        sun: 'moon'
+      should_eql =
+        itch: 'yes'
+        toe: 'no'
+        moon: 'sure'
+        she: 'always'
+      understory.rename(source, rename_obj).should.eql(should_eql)
+
+  describe '#pluck', () ->
+    source_obj =
+      itch: 'yes'
+      knee: 'no'
+      sun: 'sure'
+      she: 'always'
+      other:
+        deep: 'kiss'
+        act: 'lick'
+    it 'Does the same thing as lodash. Return single field when pluck is a string.', () ->
+      understory.pluck(source_obj, 'other.deep').should.equal('kiss')
+
+    it 'Allows you to pick more than one field.', () ->
+      understory.pluck(source_obj, ['knee', 'sun']).should.eql {knee:'no',sun:'sure'}
+
+    it 'Pluck and rename at the same time.', () ->
+      understory.pluck(source_obj, {toe: 'other.act'}).should.eql {toe:'lick'}
+
+    it 'Works with arrays of items the same as it does for a single object.', () ->
+      understory.pluck([source_obj, source_obj], ['knee', 'sun']).should.eql [{knee:'no',sun:'sure'},{knee:'no',sun:'sure'}]
+
+  describe '#clean', () ->
+    ugly_obj =
+      descriptions: ['', 'sam']
+      meta: ['', '', '']
+      empty_str: ''
+      empty_arr: []
+      empty_obj: {}
+      false_val: false
+      true_val: true
+      null_val: null
+    clean_obj =
+      descriptions: ugly_obj.descriptions
+      false_val: false
+      true_val: true
+
+    it 'Cleans up an object of fields', () ->
+      understory.clean(ugly_obj).should.eql clean_obj

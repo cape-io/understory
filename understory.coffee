@@ -3,7 +3,10 @@ path = require 'path'
 _ = require 'lodash'
 _.str = require 'underscore.string'
 _.mixin(_.str.exports())
+
 hogan = require 'hogan' # Mustache
+DJ = require 'dot-object'
+dj = new DJ()
 
 understory =
 
@@ -96,6 +99,76 @@ understory =
         return info.find_replace[arr_str]
       else
         return arr_str
+
+  rename: (item, rename_obj) ->
+    unless _.isObject(rename_obj) and _.isObject(item)
+      return item
+    _.each rename_obj, (new_key, old_key) ->
+      dj.move old_key, new_key, item
+      return
+    return item
+
+  pluck: (info, pluck) ->
+    items = info.value or info
+    pluck = pluck or info.pluck or false
+    unless _.isObject(items) and pluck
+      return info
+    pluck_many = (value) ->
+      newObj = {}
+      _.each pluck, (copy_key, set_key) ->
+        if _.isString set_key
+          new_key = set_key
+        else
+          new_key = copy_key
+        new_value = dj.pick copy_key, value
+        if new_value
+          #dj.str new_key, new_value, newObj
+          newObj[new_key] = new_value
+      return newObj
+    if _.isArray items
+      if _.isObject pluck
+        items = _.map items, pluck_many
+      else
+        items = _.map items, (item_obj) ->
+          dj.pick pluck, item_obj
+    else if _.isObject items
+      if _.isString pluck
+        items = dj.pick pluck, items
+      else if _.isObject pluck
+        items = pluck_many items
+      # else
+      #   items = _.mapValues items, (item_obj) ->
+      #     dj.pick item_obj, pluck
+    return items
+
+  # Remove unwanted fields from an object.
+  clean: (item) ->
+    unless _.isObject item
+      return item
+    _.each item, (value, id) =>
+      if _.isString(value) and _.isEmpty(value)
+        delete item[id]
+      else if value == null
+        delete item[id]
+      else if _.isArray(value) and _.isEmpty(_.compact(value))
+        delete item[id]
+      else if _.isObject(value) and not(value instanceof Date) and _.isEmpty(value)
+        delete item[id]
+      return
+    return item
+
+  # Remove any fields we don't need.
+  without: (items, without) ->
+    if _.isString without
+      without = [without]
+    if _.isArray(items)
+      items = _.map items, (item) =>
+        return @without item, without
+    else if _.isObject items
+      _.each without, (rm_field_id) ->
+        delete items[rm_field_id]
+      return items
+    return items
 
   # Split string into array based on ' '
   split: (info) ->

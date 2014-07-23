@@ -94,7 +94,7 @@ describe('understory', function() {
       return token_rep.two.three.should.equal('Dance with someone please.');
     });
   });
-  return describe('#split', function() {
+  describe('#split', function() {
     it('Does a default split on a string on spaces.', function() {
       return understory.split('one two').should.eql(['one', 'two']);
     });
@@ -153,6 +153,89 @@ describe('understory', function() {
         index: 2
       });
       return should.equal(result, null);
+    });
+  });
+  describe('#rename', function() {
+    return it('Renames props of an object based on another.', function() {
+      var rename_obj, should_eql, source;
+      source = {
+        itch: 'yes',
+        knee: 'no',
+        sun: 'sure',
+        she: 'always'
+      };
+      rename_obj = {
+        knee: 'toe',
+        sun: 'moon'
+      };
+      should_eql = {
+        itch: 'yes',
+        toe: 'no',
+        moon: 'sure',
+        she: 'always'
+      };
+      return understory.rename(source, rename_obj).should.eql(should_eql);
+    });
+  });
+  describe('#pluck', function() {
+    var source_obj;
+    source_obj = {
+      itch: 'yes',
+      knee: 'no',
+      sun: 'sure',
+      she: 'always',
+      other: {
+        deep: 'kiss',
+        act: 'lick'
+      }
+    };
+    it('Does the same thing as lodash. Return single field when pluck is a string.', function() {
+      return understory.pluck(source_obj, 'other.deep').should.equal('kiss');
+    });
+    it('Allows you to pick more than one field.', function() {
+      return understory.pluck(source_obj, ['knee', 'sun']).should.eql({
+        knee: 'no',
+        sun: 'sure'
+      });
+    });
+    it('Pluck and rename at the same time.', function() {
+      return understory.pluck(source_obj, {
+        toe: 'other.act'
+      }).should.eql({
+        toe: 'lick'
+      });
+    });
+    return it('Works with arrays of items the same as it does for a single object.', function() {
+      return understory.pluck([source_obj, source_obj], ['knee', 'sun']).should.eql([
+        {
+          knee: 'no',
+          sun: 'sure'
+        }, {
+          knee: 'no',
+          sun: 'sure'
+        }
+      ]);
+    });
+  });
+  return describe('#clean', function() {
+    var clean_obj, ugly_obj;
+    ugly_obj = {
+      descriptions: ['', 'sam'],
+      meta: ['', '', ''],
+      empty_str: '',
+      empty_arr: [],
+      empty_obj: {},
+      false_val: false,
+      true_val: true,
+      null_val: null
+    };
+    clean_obj = {
+      descriptions: ugly_obj.descriptions,
+      false_val: false,
+      true_val: true
+    };
+    return it('Cleans up an object of fields', function() {
+      return understory.clean(ugly_obj).should.eql(clean_obj);
     });
   });
 });
