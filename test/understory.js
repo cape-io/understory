@@ -217,7 +217,7 @@ describe('understory', function() {
       ]);
     });
   });
-  return describe('#clean', function() {
+  describe('#clean', function() {
     var clean_obj, ugly_obj;
     ugly_obj = {
       descriptions: ['', 'sam'],
@@ -236,6 +236,42 @@ describe('understory', function() {
     };
     return it('Cleans up an object of fields', function() {
       return understory.clean(ugly_obj).should.eql(clean_obj);
+    });
+  });
+  return describe('#without', function() {
+    var item;
+    item = {
+      bunch: 'oh',
+      fields: 'yup',
+      more: 'yes'
+    };
+    it('Removes object field/props based on array.', function() {
+      var item_obj;
+      item_obj = understory.clone(item);
+      return understory.without(item_obj, ['fields', 'more']).should.eql({
+        bunch: 'oh'
+      });
+    });
+    it('Removes object field/props based on string.', function() {
+      var item_obj;
+      item_obj = understory.clone(item);
+      return understory.without(item_obj, 'fields').should.eql({
+        bunch: 'oh',
+        more: 'yes'
+      });
+    });
+    return it('Removes props on an array of objects.', function() {
+      var items;
+      items = [item, item, item];
+      return understory.without(items, ['fields', 'more']).should.eql([
+        {
+          bunch: 'oh'
+        }, {
+          bunch: 'oh'
+        }, {
+          bunch: 'oh'
+        }
+      ]);
     });
   });
 });

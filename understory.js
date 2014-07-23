@@ -189,7 +189,6 @@ understory = {
       _.each(without, function(rm_field_id) {
         return delete items[rm_field_id];
       });
-      return items;
     }
     return items;
   },

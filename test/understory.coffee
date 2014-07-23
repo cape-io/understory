@@ -145,3 +145,21 @@ describe 'understory', () ->
 
     it 'Cleans up an object of fields', () ->
       understory.clean(ugly_obj).should.eql clean_obj
+
+  describe '#without', () ->
+    item =
+      bunch: 'oh'
+      fields: 'yup'
+      more: 'yes'
+
+    it 'Removes object field/props based on array.', () ->
+      item_obj = understory.clone item
+      understory.without(item_obj, ['fields', 'more']).should.eql({bunch:'oh'})
+
+    it 'Removes object field/props based on string.', () ->
+      item_obj = understory.clone item
+      understory.without(item_obj, 'fields').should.eql({bunch:'oh', more:'yes'})
+
+    it 'Removes props on an array of objects.', () ->
+      items = [item, item, item]
+      understory.without(items, ['fields', 'more']).should.eql([{bunch:'oh'},{bunch:'oh'},{bunch:'oh'}])

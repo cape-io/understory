@@ -167,7 +167,6 @@ understory =
     else if _.isObject items
       _.each without, (rm_field_id) ->
         delete items[rm_field_id]
-      return items
     return items
 
   # Split string into array based on ' '
