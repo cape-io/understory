@@ -218,6 +218,8 @@ understory =
   fourth: (arr) ->
     arr[3]
 
+  not: (thing) ->
+    !thing
 
 _.mixin(path)
 _.mixin(understory)

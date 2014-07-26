@@ -1,6 +1,6 @@
 {
   "name": "understory",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Underscore + string mixin with some custom, frequently used functions.",
   "main": "understory.js",
   "scripts": {
