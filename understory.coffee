@@ -4,7 +4,7 @@ _ = require 'lodash'
 _.str = require 'underscore.string'
 _.mixin(_.str.exports())
 
-hogan = require 'hogan' # Mustache
+hogan = require 'hogan.js' # Mustache
 DJ = require 'dot-object'
 dj = new DJ()
 

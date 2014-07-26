@@ -9,7 +9,7 @@ _.str = require('underscore.string');
 
 _.mixin(_.str.exports());
 
-hogan = require('hogan');
+hogan = require('hogan.js');
 
 DJ = require('dot-object');
 

@@ -1,6 +1,6 @@
 {
   "name": "understory",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Underscore + string mixin with some custom, frequently used functions.",
   "main": "understory.js",
   "scripts": {
@@ -23,9 +23,9 @@
   "homepage": "https://github.com/cape-io/understory",
   "dependencies": {
     "lodash": "^2.4.1",
-    "hogan": "^1.0.2",
     "dot-object": "^0.3.0",
-    "underscore.string": "^2.3.3"
+    "underscore.string": "^2.3.3",
+    "hogan.js": "^3.0.2"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
