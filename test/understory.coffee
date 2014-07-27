@@ -89,6 +89,9 @@ describe 'understory', () ->
     it 'Returns null when no key of index is found.', () ->
       result = understory.split({string: 'something,two', split_on: ',', index: 2})
       should.equal(result, null);
+    it 'Will uppercase the string before split if told to.', () ->
+      result = understory.split({string: ' A,  B  , C ', trim: true, split_on: ','})
+      result.should.eql(['A', 'B', 'C'])
 
   describe '#rename', () ->
     it 'Renames props of an object based on another.', () ->

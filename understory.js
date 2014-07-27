@@ -245,6 +245,9 @@ understory = {
   },
   not: function(thing) {
     return !thing;
+  },
+  upper: function(str) {
+    return str.toUpperCase();
   }
 };
 

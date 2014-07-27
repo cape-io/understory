@@ -221,6 +221,9 @@ understory =
   not: (thing) ->
     !thing
 
+  upper: (str) ->
+    str.toUpperCase()
+
 _.mixin(path)
 _.mixin(understory)
 
