@@ -222,7 +222,10 @@ understory =
     !thing
 
   upper: (str) ->
-    str.toUpperCase()
+    if _.isString str
+      return str.toUpperCase()
+    else
+      return str
 
 _.mixin(path)
 _.mixin(understory)

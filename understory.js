@@ -247,7 +247,11 @@ understory = {
     return !thing;
   },
   upper: function(str) {
-    return str.toUpperCase();
+    if (_.isString(str)) {
+      return str.toUpperCase();
+    } else {
+      return str;
+    }
   }
 };
 
