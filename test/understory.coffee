@@ -166,3 +166,7 @@ describe 'understory', () ->
     it 'Removes props on an array of objects.', () ->
       items = [item, item, item]
       understory.without(items, ['fields', 'more']).should.eql([{bunch:'oh'},{bunch:'oh'},{bunch:'oh'}])
+
+  describe '#romanize', () ->
+    it 'Capitalizes words that contain only roman numerals.', () ->
+      understory.romanize('is Iv mx').should.eql('is IV MX')

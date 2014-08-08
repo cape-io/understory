@@ -20,6 +20,10 @@ understory =
         full_str = full_str.substring 1
     return full_str
 
+  romanize: (str) ->
+    lookFor = /\b([MDCLXVI]+)\b/ig
+    str.replace lookFor, (v) -> v.toUpperCase()
+
   dir_i: (dirname_str) ->
     unless _.isString dirname_str
       return false
