@@ -1,6 +1,6 @@
 {
   "name": "understory",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Underscore + string mixin with some custom, frequently used functions.",
   "main": "understory.js",
   "scripts": {
@@ -25,7 +25,10 @@
     "lodash": "^2.4.1",
     "dot-object": "^0.3.0",
     "underscore.string": "^2.3.3",
-    "hogan.js": "^3.0.2"
+    "hogan.js": "^3.0.2",
+    "js-yaml": "^3.1.0",
+    "yaml-front-matter": "^3.0.1",
+    "marked": "^0.3.2"
   },
   "devDependencies": {
     "mocha": "^1.20.1",

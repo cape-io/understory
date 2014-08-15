@@ -1,5 +1,5 @@
 (function() {
-  var DJ, dj, hogan, path, understory, _;
+  var DJ, dj, hogan, marked, path, understory, yaml, yamlFront, _;
 
   path = require('path');
 
@@ -15,7 +15,67 @@
 
   dj = new DJ();
 
+  yaml = require('js-yaml');
+
+  yamlFront = require('yaml-front-matter');
+
+  marked = require('marked');
+
   understory = {
+    yaml: function(string) {
+      var doc, e;
+      try {
+        doc = yaml.safeLoad(string);
+      } catch (_error) {
+        e = _error;
+        doc = string;
+        console.log(e);
+        console.log(string);
+      }
+      return doc;
+    },
+    yaml_front: function(str, field_name, return_obj) {
+      var e, str_obj;
+      if (field_name == null) {
+        field_name = 'content';
+      }
+      if (return_obj == null) {
+        return_obj = false;
+      }
+      try {
+        str_obj = yamlFront.loadFront(str, field_name);
+      } catch (_error) {
+        e = _error;
+        str_obj = {
+          _error: 'yaml',
+          _yaml_error: e
+        };
+        str_obj[field_name] = str;
+        console.log(e);
+      }
+      if (1 === _.size(str_obj && !return_obj)) {
+        return str_obj[field_name];
+      } else {
+        return str_obj;
+      }
+    },
+    md: function(str, field_name) {
+      var str_info;
+      if (field_name == null) {
+        field_name = 'content';
+      }
+      if (!str) {
+        return null;
+      }
+      str_info = this.yaml_front(str, field_name);
+      if (_.isObject(str_info) && str_info[field_name]) {
+        str_info[field_name] = this.markdown(str_info[field_name]);
+      } else {
+        str_info = this.markdown(str_info);
+      }
+      return str_info;
+    },
+    markdown: marked,
     rm_prefix: function(full_str, prefix, strip_slash) {
       if (strip_slash == null) {
         strip_slash = true;

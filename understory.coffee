@@ -7,8 +7,47 @@ _.mixin(_.str.exports())
 hogan = require 'hogan.js' # Mustache
 DJ = require 'dot-object'
 dj = new DJ()
+yaml = require 'js-yaml'
+yamlFront = require('yaml-front-matter') # YAML Front
+marked = require 'marked' # Markdown
 
 understory =
+  yaml: (string) ->
+    try
+      doc = yaml.safeLoad(string)
+    catch e
+      doc = string
+      console.log e
+      console.log string
+    return doc
+
+  yaml_front: (str, field_name = 'content', return_obj = false) ->
+    try
+      str_obj = yamlFront.loadFront str, field_name
+    catch e
+      str_obj =
+        _error: 'yaml'
+        _yaml_error: e
+      str_obj[field_name] = str
+      console.log e
+
+    if 1 == _.size str_obj and !return_obj
+      return str_obj[field_name]
+    else
+      return str_obj
+
+  md: (str, field_name = 'content') ->
+    unless str
+      return null
+    # Look for yaml
+    str_info = @yaml_front(str, field_name)
+    if _.isObject(str_info) and str_info[field_name]
+      str_info[field_name] = @markdown str_info[field_name]
+    else
+      str_info = @markdown str_info
+    return str_info
+
+  markdown: marked
 
   # File path related functions.
 
