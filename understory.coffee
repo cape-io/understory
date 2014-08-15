@@ -1,4 +1,5 @@
 path = require 'path'
+crypto = require 'crypto'
 
 _ = require 'lodash'
 _.str = require 'underscore.string'
@@ -109,6 +110,9 @@ understory =
     #     field.arg.string = tr
 
     return t
+
+  md5: (string_to_hash) ->
+    crypto.createHash('md5').update(string_to_hash).digest('hex')
 
   string_replace: (info) ->
     if info.value and _.isString info.value

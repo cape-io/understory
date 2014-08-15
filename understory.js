@@ -1,7 +1,9 @@
 (function() {
-  var DJ, dj, hogan, marked, path, understory, yaml, yamlFront, _;
+  var DJ, crypto, dj, hogan, marked, path, understory, yaml, yamlFront, _;
 
   path = require('path');
+
+  crypto = require('crypto');
 
   _ = require('lodash');
 
@@ -133,6 +135,9 @@
         t = hogan.compile(t).render(vars);
       }
       return t;
+    },
+    md5: function(string_to_hash) {
+      return crypto.createHash('md5').update(string_to_hash).digest('hex');
     },
     string_replace: function(info) {
       var re, string;
