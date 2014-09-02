@@ -115,6 +115,19 @@
       })(this));
       return ret_val;
     },
+    ext: function(str) {
+      return path.extname(str).toLowerCase();
+    },
+    filename: function(str) {
+      return path.basename(this.no_ext(str));
+    },
+    no_ext: function(str) {
+      var ext;
+      if (ext = path.extname(str)) {
+        str = str.substring(0, str.length - ext.length);
+      }
+      return str;
+    },
     token_replace: function(t, vars) {
       if (!_.isObject(vars)) {
         return t;

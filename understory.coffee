@@ -78,6 +78,17 @@ understory =
 
     return ret_val
 
+  ext: (str) ->
+    return path.extname(str).toLowerCase()
+
+  filename: (str) ->
+    return path.basename(@no_ext(str))
+
+  no_ext: (str) ->
+    if ext = path.extname(str)
+      str = str.substring 0, (str.length - ext.length)
+    return str
+
   token_replace: (t, vars) ->
     # vars must be an object of values that gets sent to mustache.
     unless _.isObject vars
