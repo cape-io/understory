@@ -8,8 +8,7 @@ _.mixin(_.str.exports())
 hogan = require 'hogan.js' # Mustache
 DJ = require 'dot-object'
 dj = new DJ()
-yaml = require 'js-yaml'
-yamlFront = require('yaml-front-matter') # YAML Front
+yaml = require('yaml-front-matter') # YAML Front
 marked = require 'marked' # Markdown
 
 understory =
@@ -24,7 +23,7 @@ understory =
 
   yaml_front: (str, field_name = 'content', return_obj = false) ->
     try
-      str_obj = yamlFront.loadFront str, field_name
+      str_obj = yaml.loadFront str, field_name
     catch e
       str_obj =
         _error: 'yaml'
