@@ -1,8 +1,9 @@
 import {
-  at, curry, defaultTo, divide, eq, fill, find, flow, gt, has,
-  identity, includes, isFunction, isPlainObject, lt, nthArg, spread, zipObject,
+  compact, concat, cond, curry, divide, eq, flow, gt, has,
+  identity, includes, isArray, isEmpty, isNull, isString, isPlainObject,
+  lt, map, omitBy, overEvery, overSome, negate, pickBy, stubTrue, trim,
 } from 'lodash/fp'
-// import { concat, cond, curry, identity, stubTrue } from 'lodash/fp'
+// import { concat, cond, curry, identity,  } from 'lodash/fp'
 
 /**
  * Curried function form of a conditional ternary expression
@@ -32,22 +33,58 @@ export function overBranch(boolCheck, getTrue, getFalse = identity) {
 export const condId = (...conditions) => cond(concat(conditions, [[stubTrue, identity]]))
 
 /**
- * Returns true if sent a value that is exactly false.
+ * Returns true if sent a value that is exactly `false`.
  * @param {any} value Send it anything
  * @return {bool} Tells you if it is exactly false.
+ * @example isFalse(1) // => false
+ * @example isFalse(false) // => true
  */
 export const isFalse = eq(false)
+
+/**
+ * Returns true if sent a value that is exactly `false`.
+ * @param {any} value Send it anything
+ * @return {bool} Tells you if it is exactly false.
+ * @example isTrue(1) // => false
+ * @example isTrue(true) // => true
+ */
 export const isTrue = eq(true)
 export const isEmptyString = overEvery([isString, trim, isEmpty])
 export const isEmptyArray = overEvery([isArray, flow(compact, isEmpty)])
-export const isEmptyObject = overEvery([isObject, flow(pickBy(identity), isEmpty)])
-export const isGlib = overSome([
-  isNull, isEmptyString, isEmptyArray, isEmptyObject,
+export const isEmptyObject = overEvery([isPlainObject, flow(pickBy(identity), isEmpty)])
+export const isWorthless = overSome([
+  isEmpty, isEmptyString, isEmptyArray, isEmptyObject,
 ])
+
+export const cleanObject = omitBy(isWorthless)
+
+/**
+ * Opposite of `_.isEmpty`.
+ * @type {Function}
+ */
 export const hasSize = negate(isEmpty)
 
 export const oneOf = includes.convert({ rearg: false })
+
+/**
+ * Checks to see if second arg is greater than first. See _.lt
+ * @type {Function}
+ * @example isGt(1)(2) // => true
+ */
 export const isGt = lt
+
+/**
+ * Checks to see if second arg is less than first. See _.gt
+ * @type {Boolean}
+ * @example isLt(2)(1) // => true
+ */
 export const isLt = gt
+
 export const hasOf = has.convert({ rearg: false })
 export const divideBy = divide.convert({ rearg: true })
+
+export const clean = condId(
+  [isArray, flow(compact, map(clean))], // eslint-disable-line no-use-before-define
+  [isPlainObject, cleanObject],
+  [isString, trim],
+)
