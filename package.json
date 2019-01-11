@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "compile": "babel src --out-dir lib",
+    "docs": "documentation build src/index.js -f md -o API.md",
     "prepublish": "npm run compile",
     "test": "jest --watch"
   },
