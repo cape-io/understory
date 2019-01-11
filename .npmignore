@@ -1,1 +1,9 @@
-understory.coffee
+src/
+.git/
+.babelrc
+.editorconfig
+.eslintrc
+.gitignore
+*.test.js
+yarn-error.log
+.serverless

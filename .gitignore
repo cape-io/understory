@@ -1,2 +1,7 @@
+.DS_Store
 node_modules
-understory.js
+npm-debug.log
+yarn-error.log
+dist
+lib
+.serverless
