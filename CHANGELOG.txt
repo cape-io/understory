@@ -1,0 +1,7 @@
+## [1.0.1]
+
+* Split out `overBranch` so it can be required individually.
+
+## [1.0.0]
+
+* Copy of functions from cape-lodash project.
