@@ -1,3 +1,7 @@
+## [1.0.2]
+
+* isEmptyString should trim before check
+
 ## [1.0.1]
 
 * Split out `overBranch` so it can be required individually.
