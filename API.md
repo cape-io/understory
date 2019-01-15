@@ -4,21 +4,22 @@
 
 -   [branch][1]
     -   [Parameters][2]
--   [overBranch][3]
+-   [condId][3]
     -   [Parameters][4]
--   [condId][5]
+-   [isFalse][5]
     -   [Parameters][6]
--   [isFalse][7]
-    -   [Parameters][8]
-    -   [Examples][9]
--   [isTrue][10]
-    -   [Parameters][11]
-    -   [Examples][12]
--   [hasSize][13]
--   [isGt][14]
+    -   [Examples][7]
+-   [isTrue][8]
+    -   [Parameters][9]
+    -   [Examples][10]
+-   [hasSize][11]
+-   [isGt][12]
+    -   [Examples][13]
+-   [isLt][14]
     -   [Examples][15]
--   [isLt][16]
-    -   [Examples][17]
+-   [overBranch][16]
+    -   [Parameters][17]
+    -   [Examples][18]
 
 ## branch
 
@@ -31,18 +32,6 @@ Curried function form of a conditional ternary expression
 -   `bool` **any** The value to check truthiness against.
 
 Returns **any** The trueVal or falseVal depending on bool.
-
-## overBranch
-
-Passes argument to boolCheck function. If true sends same argument to `getTrue` function.
-
-### Parameters
-
--   `boolCheck` **[Function][18]** Function that check if value is true.
--   `getTrue` **[Function][18]** Optional. Get value when false.
--   `getFalse`   (optional, default `identity`)
-
-Returns **any** Result of getTrue or getFalse.
 
 ## condId
 
@@ -98,13 +87,13 @@ Returns **bool** Tells you if it is exactly false.
 
 Opposite of `_.isEmpty`.
 
-Type: [Function][18]
+Type: [Function][20]
 
 ## isGt
 
 Checks to see if second arg is greater than first. See \_.lt
 
-Type: [Function][18]
+Type: [Function][20]
 
 ### Examples
 
@@ -116,7 +105,7 @@ isGt(1)(2) // => true
 
 Checks to see if second arg is less than first. See \_.gt
 
-Type: [Boolean][20]
+Type: [Boolean][21]
 
 ### Examples
 
@@ -124,42 +113,62 @@ Type: [Boolean][20]
 isLt(2)(1) // => true
 ```
 
+## overBranch
+
+Passes argument to boolCheck function. If true sends same argument to `getTrue` function.
+
+### Parameters
+
+-   `boolCheck` **[Function][20]** Function that check if value is true.
+-   `getTrue` **[Function][20]** Optional. Get value when false.
+-   `getFalse`   (optional, default `identity`)
+
+### Examples
+
+```javascript
+overBranch(boolCheck, getTrue)
+```
+
+Returns **any** Result of getTrue or getFalse.
+
 [1]: #branch
 
 [2]: #parameters
 
-[3]: #overbranch
+[3]: #condid
 
 [4]: #parameters-1
 
-[5]: #condid
+[5]: #isfalse
 
 [6]: #parameters-2
 
-[7]: #isfalse
+[7]: #examples
 
-[8]: #parameters-3
+[8]: #istrue
 
-[9]: #examples
+[9]: #parameters-3
 
-[10]: #istrue
+[10]: #examples-1
 
-[11]: #parameters-4
+[11]: #hassize
 
-[12]: #examples-1
+[12]: #isgt
 
-[13]: #hassize
+[13]: #examples-2
 
-[14]: #isgt
+[14]: #islt
 
-[15]: #examples-2
+[15]: #examples-3
 
-[16]: #islt
+[16]: #overbranch
 
-[17]: #examples-3
+[17]: #parameters-4
 
-[18]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[18]: #examples-4
 
 [19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[20]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[20]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[21]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
