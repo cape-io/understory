@@ -38,7 +38,7 @@ export const isFalse = eq(false)
  * @example isTrue(true) // => true
  */
 export const isTrue = eq(true)
-export const isEmptyString = overEvery([isString, trim, isEmpty])
+export const isEmptyString = overEvery([isString, flow(trim, isEmpty)])
 export const isEmptyArray = overEvery([isArray, flow(compact, isEmpty)])
 export const isEmptyObject = overEvery([isPlainObject, flow(pickBy(identity), isEmpty)])
 export const isWorthless = overSome([
