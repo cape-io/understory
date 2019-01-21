@@ -1,6 +1,6 @@
 {
   "name": "understory",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Composable utility functions based on lodash.",
   "main": "lib/index.js",
   "scripts": {
