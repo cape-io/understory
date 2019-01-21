@@ -1,7 +1,7 @@
 import {
-  compact, concat, cond, curry, divide, eq, flow, gt, has,
+  compact, concat, cond, curry, curryN, divide, eq, flow, gt, has,
   identity, includes, isArray, isEmpty, isString, isPlainObject,
-  lt, map, omitBy, overEvery, overSome, negate, pickBy, stubTrue, trim,
+  lt, map, omitBy, overEvery, overSome, negate, pickBy, rearg, stubTrue, subtract, trim,
 } from 'lodash/fp'
 // import { concat, cond, curry, identity,  } from 'lodash/fp'
 
@@ -71,6 +71,22 @@ export const isLt = gt
 
 export const hasOf = has.convert({ rearg: false })
 export const divideBy = divide.convert({ rearg: true })
+
+/**
+ * Subtract two numbers.
+ *
+ * @category Math
+ * @param {number} subtrahend A quantity/number to be subtracted from another.
+ * @param {number} minuend A quantity/number from which another is to be subtracted.
+ * @returns {number} Returns the difference.
+ * @example
+ *
+ * _.subtrahend(6)(8);
+ * // => 2
+ * _.subtrahend(6, 8);
+ * // => 2
+ */
+export const subtrahend = curryN(2, rearg([1, 0], subtract))
 
 export const clean = condId(
   [isArray, flow(compact, map(clean))], // eslint-disable-line no-use-before-define

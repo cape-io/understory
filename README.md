@@ -22,7 +22,7 @@ Accepts many [ifFunc, thenFunc] arguments. See \_.cond() for more info.
 
 ### Parameters
 
--   `conditions` **[array][19]** one or more condition arrays [ifFunc, thenFunc]
+-   `conditions` **[array][22]** one or more condition arrays [ifFunc, thenFunc]
 
 Returns **any** Result of found thenFunc or if no conditions found return original.
 
@@ -70,13 +70,13 @@ Returns **bool** Tells you if it is exactly false.
 
 Opposite of `_.isEmpty`.
 
-Type: [Function][20]
+Type: [Function][23]
 
 ## isGt
 
 Checks to see if second arg is greater than first. See \_.lt
 
-Type: [Function][20]
+Type: [Function][23]
 
 ### Examples
 
@@ -88,7 +88,7 @@ isGt(1)(2) // => true
 
 Checks to see if second arg is less than first. See \_.gt
 
-Type: [Boolean][21]
+Type: [Boolean][24]
 
 ### Examples
 
@@ -96,14 +96,34 @@ Type: [Boolean][21]
 isLt(2)(1) // => true
 ```
 
+## subtrahend
+
+Subtract two numbers.
+
+### Parameters
+
+-   `subtrahend` **[number][25]** A quantity/number to be subtracted from another.
+-   `minuend` **[number][25]** A quantity/number from which another is to be subtracted.
+
+### Examples
+
+```javascript
+_.subtrahend(6)(8);
+// => 2
+_.subtrahend(6, 8);
+// => 2
+```
+
+Returns **[number][25]** Returns the difference.
+
 ## overBranch
 
 Passes argument to boolCheck function. If true sends same argument to `getTrue` function.
 
 ### Parameters
 
--   `boolCheck` **[Function][20]** Function that check if value is true.
--   `getTrue` **[Function][20]** Optional. Get value when false.
+-   `boolCheck` **[Function][23]** Function that check if value is true.
+-   `getTrue` **[Function][23]** Optional. Get value when false.
 -   `getFalse`   (optional, default `identity`)
 
 ### Examples
@@ -144,14 +164,22 @@ Returns **any** Result of getTrue or getFalse.
 
 [15]: #examples-3
 
-[16]: #overbranch
+[16]: #subtrahend
 
 [17]: #parameters-4
 
 [18]: #examples-4
 
-[19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[19]: #overbranch
 
-[20]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[20]: #parameters-5
 
-[21]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[21]: #examples-5
+
+[22]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[23]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[24]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[25]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
