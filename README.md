@@ -4,6 +4,7 @@ Composable utility functions based on or inspired by [lodash](https://lodash.com
 
 Install [ESLint rules for lodash/fp](https://github.com/jfmengels/eslint-plugin-lodash-fp) by extending eslint with `plugin:lodash-fp/recommended` and including the `lodash-fp` plugin.
 
+There are also promise enabled varients of `_.flow` as `flowP` and `_.forEach` as `forEachP`.
 
 ## branch
 
