@@ -1,18 +1,16 @@
 import {
-  compact, concat, cond, curry, curryN, divide, eq, flow, gt, has,
+  compact, concat, cond, curryN, divide, eq, flow, gt, has,
   identity, includes, isArray, isEmpty, isString, isPlainObject,
   lt, map, omitBy, overEvery, overSome, negate, pickBy, rearg, stubTrue, subtract, trim,
 } from 'lodash/fp'
 // import { concat, cond, curry, identity,  } from 'lodash/fp'
 
 /**
- * Curried function form of a conditional ternary expression
- * @param {any} trueVal The value return when true.
- * @param {any} falseVal The value returned when false.
- * @param {any} bool The value to check truthiness against.
- * @return {any} The trueVal or falseVal depending on bool.
+ * [callWith description]
+ * @param  {[type]} args [description]
+ * @return {[type]}      [description]
  */
-export const branch = curry((trueVal, falseVal, bool) => (bool ? trueVal : falseVal))
+export const callWith = (...args) => func => func(...args)
 
 /**
  * Accepts many [ifFunc, thenFunc] arguments. See _.cond() for more info.

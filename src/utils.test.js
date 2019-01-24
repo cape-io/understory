@@ -9,3 +9,10 @@ describe('subtrahend', () => {
     expect(subtrahend(10, 12)).toEqual(2)
   })
 })
+// test('oneOf', (t) => {
+//   const validOptions = oneOf(['a', 'b'])
+//   t.true(validOptions('a'), 'a')
+//   t.true(validOptions('b'), 'b')
+//   t.false(validOptions('c'), 'c')
+//   t.end()
+// })

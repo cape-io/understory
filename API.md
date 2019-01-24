@@ -2,7 +2,7 @@
 
 ### Table of Contents
 
--   [branch][1]
+-   [callWith][1]
     -   [Parameters][2]
 -   [condId][3]
     -   [Parameters][4]
@@ -20,21 +20,21 @@
 -   [subtrahend][16]
     -   [Parameters][17]
     -   [Examples][18]
--   [overBranch][19]
+-   [branch][19]
     -   [Parameters][20]
-    -   [Examples][21]
+-   [overBranch][21]
+    -   [Parameters][22]
+    -   [Examples][23]
 
-## branch
+## callWith
 
-Curried function form of a conditional ternary expression
+[callWith description]
 
 ### Parameters
 
--   `trueVal` **any** The value return when true.
--   `falseVal` **any** The value returned when false.
--   `bool` **any** The value to check truthiness against.
+-   `args` **\[type]** [description]
 
-Returns **any** The trueVal or falseVal depending on bool.
+Returns **\[type]** [description]
 
 ## condId
 
@@ -42,7 +42,7 @@ Accepts many [ifFunc, thenFunc] arguments. See \_.cond() for more info.
 
 ### Parameters
 
--   `conditions` **[array][22]** one or more condition arrays [ifFunc, thenFunc]
+-   `conditions` **[array][24]** one or more condition arrays [ifFunc, thenFunc]
 
 Returns **any** Result of found thenFunc or if no conditions found return original.
 
@@ -90,13 +90,13 @@ Returns **bool** Tells you if it is exactly false.
 
 Opposite of `_.isEmpty`.
 
-Type: [Function][23]
+Type: [Function][25]
 
 ## isGt
 
 Checks to see if second arg is greater than first. See \_.lt
 
-Type: [Function][23]
+Type: [Function][25]
 
 ### Examples
 
@@ -108,7 +108,7 @@ isGt(1)(2) // => true
 
 Checks to see if second arg is less than first. See \_.gt
 
-Type: [Boolean][24]
+Type: [Boolean][26]
 
 ### Examples
 
@@ -122,8 +122,8 @@ Subtract two numbers.
 
 ### Parameters
 
--   `subtrahend` **[number][25]** A quantity/number to be subtracted from another.
--   `minuend` **[number][25]** A quantity/number from which another is to be subtracted.
+-   `subtrahend` **[number][27]** A quantity/number to be subtracted from another.
+-   `minuend` **[number][27]** A quantity/number from which another is to be subtracted.
 
 ### Examples
 
@@ -134,7 +134,19 @@ _.subtrahend(6, 8);
 // => 2
 ```
 
-Returns **[number][25]** Returns the difference.
+Returns **[number][27]** Returns the difference.
+
+## branch
+
+Curried function form of a conditional ternary expression
+
+### Parameters
+
+-   `trueVal` **any** The value returned when true.
+-   `falseVal` **any** The value returned when false.
+-   `bool` **any** The value to check truthiness against.
+
+Returns **any** The trueVal or falseVal depending on bool.
 
 ## overBranch
 
@@ -142,8 +154,8 @@ Passes argument to boolCheck function. If true sends same argument to `getTrue` 
 
 ### Parameters
 
--   `boolCheck` **[Function][23]** Function that check if value is true.
--   `getTrue` **[Function][23]** Optional. Get value when false.
+-   `boolCheck` **[Function][25]** Function that check if value is true.
+-   `getTrue` **[Function][25]** Optional. Get value when false.
 -   `getFalse`   (optional, default `identity`)
 
 ### Examples
@@ -154,7 +166,7 @@ overBranch(boolCheck, getTrue)
 
 Returns **any** Result of getTrue or getFalse.
 
-[1]: #branch
+[1]: #callwith
 
 [2]: #parameters
 
@@ -190,16 +202,20 @@ Returns **any** Result of getTrue or getFalse.
 
 [18]: #examples-4
 
-[19]: #overbranch
+[19]: #branch
 
 [20]: #parameters-5
 
-[21]: #examples-5
+[21]: #overbranch
 
-[22]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[22]: #parameters-6
 
-[23]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[23]: #examples-5
 
-[24]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[24]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[25]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[25]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[26]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[27]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
