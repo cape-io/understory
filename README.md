@@ -6,6 +6,8 @@ Install [ESLint rules for lodash/fp](https://github.com/jfmengels/eslint-plugin-
 
 There are also promise enabled varients of `_.flow` as `flowP` and `_.forEach` as `forEachP`.
 
+We call it "understory" because it's close to "underscore" and the understory is the layer of vegetation below the forest canopy.
+
 ## branch
 
 Curried function form of a conditional ternary expression

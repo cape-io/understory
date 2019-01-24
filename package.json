@@ -16,7 +16,11 @@
   "keywords": [
     "lodash",
     "data",
-    "utility"
+    "utility",
+    "promise",
+    "serial",
+    "flow",
+    "composable"
   ],
   "author": "Kai Curry <kai@cape.io> (http://www.cape.io/)",
   "license": "ISC",
