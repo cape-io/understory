@@ -4,6 +4,37 @@ Composable utility functions based on or inspired by [lodash](https://lodash.com
 
 Install [ESLint rules for lodash/fp](https://github.com/jfmengels/eslint-plugin-lodash-fp) by extending eslint with `plugin:lodash-fp/recommended` and including the `lodash-fp` plugin.
 
+
+## branch
+
+Curried function form of a conditional ternary expression
+
+### Parameters
+
+-   `trueVal` **any** The value returned when true.
+-   `falseVal` **any** The value returned when false.
+-   `bool` **any** The value to check truthiness against.
+
+Returns **any** The trueVal or falseVal depending on bool.
+
+## overBranch
+
+Passes argument to boolCheck function. If true sends same argument to `getTrue` function.
+
+### Parameters
+
+-   `boolCheck` **[Function][26]** Function that check if value is true.
+-   `getTrue` **[Function][26]** Optional. Get value when false.
+-   `getFalse`   (optional, default `identity`)
+
+### Examples
+
+```javascript
+overBranch(boolCheck, getTrue)
+```
+
+Returns **any** Result of getTrue or getFalse.
+
 ## callWith
 
 [callWith description]
@@ -20,7 +51,7 @@ Accepts many [ifFunc, thenFunc] arguments. See \_.cond() for more info.
 
 ### Parameters
 
--   `conditions` **[array][24]** one or more condition arrays [ifFunc, thenFunc]
+-   `conditions` **[array][27]** one or more condition arrays [ifFunc, thenFunc]
 
 Returns **any** Result of found thenFunc or if no conditions found return original.
 
@@ -68,13 +99,13 @@ Returns **bool** Tells you if it is exactly false.
 
 Opposite of `_.isEmpty`.
 
-Type: [Function][25]
+Type: [Function][26]
 
 ## isGt
 
 Checks to see if second arg is greater than first. See \_.lt
 
-Type: [Function][25]
+Type: [Function][26]
 
 ### Examples
 
@@ -86,7 +117,7 @@ isGt(1)(2) // => true
 
 Checks to see if second arg is less than first. See \_.gt
 
-Type: [Boolean][26]
+Type: [Boolean][28]
 
 ### Examples
 
@@ -100,8 +131,8 @@ Subtract two numbers.
 
 ### Parameters
 
--   `subtrahend` **[number][27]** A quantity/number to be subtracted from another.
--   `minuend` **[number][27]** A quantity/number from which another is to be subtracted.
+-   `subtrahend` **[number][29]** A quantity/number to be subtracted from another.
+-   `minuend` **[number][29]** A quantity/number from which another is to be subtracted.
 
 ### Examples
 
@@ -112,88 +143,78 @@ _.subtrahend(6, 8);
 // => 2
 ```
 
-Returns **[number][27]** Returns the difference.
+Returns **[number][29]** Returns the difference.
 
-## branch
+## forEachP
 
-Curried function form of a conditional ternary expression
-
-### Parameters
-
--   `trueVal` **any** The value returned when true.
--   `falseVal` **any** The value returned when false.
--   `bool` **any** The value to check truthiness against.
-
-Returns **any** The trueVal or falseVal depending on bool.
-
-## overBranch
-
-Passes argument to boolCheck function. If true sends same argument to `getTrue` function.
+Like \_.forEach but can handle a promise generator as the iteratee.
+Iterates over elements of collection and invokes iteratee for each element.
+The iteratee is invoked with one argument: (value).
+Iteratee functions may NOT exit iteration early.
 
 ### Parameters
 
--   `boolCheck` **[Function][25]** Function that check if value is true.
--   `getTrue` **[Function][25]** Optional. Get value when false.
--   `getFalse`   (optional, default `identity`)
+-   `iteratee` **[Function][26]** The function that should process each item.
+-   `collection` **[Array][27]** The iterable. Each val send to func after previous resolves.
 
-### Examples
+Returns **[Promise][30]** The value return value of the last promise.
 
-```javascript
-overBranch(boolCheck, getTrue)
-```
-
-Returns **any** Result of getTrue or getFalse.
-
-[1]: #callwith
+[1]: #branch
 
 [2]: #parameters
 
-[3]: #condid
+[3]: #overbranch
 
 [4]: #parameters-1
 
-[5]: #isfalse
+[5]: #examples
 
-[6]: #parameters-2
+[6]: #callwith
 
-[7]: #examples
+[7]: #parameters-2
 
-[8]: #istrue
+[8]: #condid
 
 [9]: #parameters-3
 
-[10]: #examples-1
+[10]: #isfalse
 
-[11]: #hassize
+[11]: #parameters-4
 
-[12]: #isgt
+[12]: #examples-1
 
-[13]: #examples-2
+[13]: #istrue
 
-[14]: #islt
+[14]: #parameters-5
 
-[15]: #examples-3
+[15]: #examples-2
 
-[16]: #subtrahend
+[16]: #hassize
 
-[17]: #parameters-4
+[17]: #isgt
 
-[18]: #examples-4
+[18]: #examples-3
 
-[19]: #branch
+[19]: #islt
 
-[20]: #parameters-5
+[20]: #examples-4
 
-[21]: #overbranch
+[21]: #subtrahend
 
 [22]: #parameters-6
 
 [23]: #examples-5
 
-[24]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[24]: #foreachp
 
-[25]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[25]: #parameters-7
 
-[26]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[26]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[27]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[27]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[28]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[29]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+
+[30]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
