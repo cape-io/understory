@@ -1,7 +1,7 @@
 import {
-  compact, concat, cond, curryN, divide, eq, flow, gt, has,
-  identity, includes, isArray, isEmpty, isString, isPlainObject,
-  lt, map, omitBy, overEvery, overSome, negate, pickBy, rearg, stubTrue, subtract, trim,
+  compact, concat, cond, divide, eq, flow, gt, has,
+  identity, includes, isArray, isEmpty, isNull, isString, isPlainObject,
+  lt, map, omitBy, overEvery, overSome, negate, pickBy, reject, stubTrue, subtract, trim,
 } from 'lodash/fp'
 // import { concat, cond, curry, identity,  } from 'lodash/fp'
 
@@ -29,6 +29,15 @@ export const condId = (...conditions) => cond(concat(conditions, [[stubTrue, ide
 export const isFalse = eq(false)
 
 /**
+ * Returns true if sent a value that is exactly 0.
+ * @param {any} value Send it anything
+ * @return {bool} Tells you if it is exactly zero.
+ * @example isZero(0.1) // => false
+ * @example isZero(0) // => true
+ */
+export const isZero = eq(0)
+
+/**
  * Returns true if sent a value that is exactly `false`.
  * @param {any} value Send it anything
  * @return {bool} Tells you if it is exactly false.
@@ -36,12 +45,29 @@ export const isFalse = eq(false)
  * @example isTrue(true) // => true
  */
 export const isTrue = eq(true)
+
 export const isEmptyString = overEvery([isString, flow(trim, isEmpty)])
-export const isEmptyArray = overEvery([isArray, flow(compact, isEmpty)])
 export const isEmptyObject = overEvery([isPlainObject, flow(pickBy(identity), isEmpty)])
-export const isWorthless = overSome([
-  isEmpty, isEmptyString, isEmptyArray, isEmptyObject,
+export const isEmptyArr = overEvery([isArray, flow(compact, isEmpty)])
+export const rejectEmpty = reject(overSome([isEmptyString, isEmptyObject, isEmptyArr]))
+// Only does one level of recursion. :-(
+export const isEmptyArray = overEvery([
+  isArray, flow(compact, rejectEmpty, isEmpty),
 ])
+
+/**
+ * [isWorthless description]
+ * @param {any} value
+ * @return {bool} Tells you if value is empty.
+ * @example isWorthless({}) // => true
+ * @example isWorthless([' ', null]) // => true
+ * @example isWorthless(' ') // => true
+ * @example isWorthless({ foo: null, bar: 0 }) // => true
+ */
+export const isWorthless = overSome([
+  isNull, isFalse, isZero, isEmptyString, isEmptyArray, isEmptyObject,
+])
+export const rejectWorthless = reject(isWorthless)
 
 export const cleanObject = omitBy(isWorthless)
 
@@ -84,7 +110,7 @@ export const divideBy = divide.convert({ rearg: true })
  * _.subtrahend(6, 8);
  * // => 2
  */
-export const subtrahend = curryN(2, rearg([1, 0], subtract))
+export const subtrahend = subtract.convert({ rearg: true })
 
 export const clean = condId(
   [isArray, flow(compact, map(clean))], // eslint-disable-line no-use-before-define
