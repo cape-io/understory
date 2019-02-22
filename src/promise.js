@@ -13,14 +13,16 @@ export const forEachP = curry((iteratee, collection) => collection.reduce(
   (chain, arg) => chain.then(() => iteratee(arg)),
   Promise.resolve(),
 ))
+
+const reducer = (state, func) => state.then(newState => func(newState))
 export const chainP = (...fns) => fns.reduce(
-  (promiseChain, func) => promiseChain.then(func),
+  reducer,
   Promise.resolve(),
 )
-
 export const flowP = (...fns) => start => fns.reduce(
-  (state, func) => state.then(newState => func(newState)),
+  reducer,
   Promise.resolve(start),
 )
+
 export const wait = ms => new Promise(r => setTimeout(r, ms))
 export const waitFor = ms => () => wait(ms)

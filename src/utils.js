@@ -71,6 +71,12 @@ export const rejectWorthless = reject(isWorthless)
 
 export const cleanObject = omitBy(isWorthless)
 
+export const clean = condId(
+  [isArray, flow(compact, map(clean))], // eslint-disable-line no-use-before-define
+  [isPlainObject, cleanObject],
+  [isString, trim],
+)
+
 /**
  * Opposite of `_.isEmpty`.
  * @type {Function}
@@ -112,8 +118,4 @@ export const divideBy = divide.convert({ rearg: true })
  */
 export const subtrahend = subtract.convert({ rearg: true })
 
-export const clean = condId(
-  [isArray, flow(compact, map(clean))], // eslint-disable-line no-use-before-define
-  [isPlainObject, cleanObject],
-  [isString, trim],
-)
+export const stubNull = () => null
