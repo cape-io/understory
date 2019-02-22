@@ -5,16 +5,24 @@ import overBranch from './overBranch'
 describe('overBranch', () => {
   const func1 = overBranch(_.isString, _.toUpper)
   test('When string uppercase', () => {
-    expect(func1('abc')).toEqual('ABC')
+    expect(func1('abc')).toBe('ABC')
   })
   test('ignore number', () => {
-    expect(func1(1)).toEqual(1)
+    expect(func1(1)).toBe(1)
   })
-  const func2 = overBranch(_.isString, _.toUpper, _.constant('No'))
   test('not string return NO', () => {
-    expect(func2(1)).toEqual('No')
-    expect(func2([])).toEqual('No')
-    expect(func2({})).toEqual('No')
+    const func = overBranch(_.isString, _.toUpper, _.constant('No'))
+    expect(func(1)).toBe('No')
+    expect(func([])).toBe('No')
+    expect(func({})).toBe('No')
   })
-  // const obj2Arr = overBranch(_.isPlainObject, Array)
+  test('Allow non-thunk responses', () => {
+    const func = overBranch(_.isNumber, 'number', 'not-number')
+    expect(func('abc')).toBe('not-number')
+    expect(func(1)).toBe('number')
+  })
+  test('Another Example', () => {
+    const func = overBranch(_.isPlainObject, Array)
+    expect(func({ foo: 'bar' })).toEqual(['bar'])
+  })
 })
