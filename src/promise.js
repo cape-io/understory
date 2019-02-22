@@ -13,7 +13,7 @@ export const forEachP = curry((iteratee, collection) => collection.reduce(
   (chain, arg) => chain.then(() => iteratee(arg)),
   Promise.resolve(),
 ))
-export const chainP = fns => fns.reduce(
+export const chainP = (...fns) => fns.reduce(
   (promiseChain, func) => promiseChain.then(func),
   Promise.resolve(),
 )
