@@ -26,7 +26,7 @@ export function overBranch(boolCheck, getTrue, getFalse = identity) {
  * @example onTrue(_.isString, _.toUpper)(45) // => 45
  */
 export const onTrue = curry((boolCheck, getValue, item) => (
-  boolCheck(item) ? getThunk(getValue(item)) : item
+  boolCheck(item) ? getThunk(getValue)(item) : item
 ))
 
 export default overBranch

@@ -1,5 +1,5 @@
 import _ from 'lodash/fp'
-import overBranch from './overBranch'
+import { onTrue, overBranch } from './overBranch'
 
 /* globals describe test expect */
 describe('overBranch', () => {
@@ -23,6 +23,21 @@ describe('overBranch', () => {
   })
   test('Another Example', () => {
     const func = overBranch(_.isPlainObject, Array)
-    expect(func({ foo: 'bar' })).toEqual(['bar'])
+    expect(func({ foo: 'bar' })).toEqual([{ foo: 'bar' }])
+  })
+})
+
+describe('onTrue', () => {
+  const func1 = onTrue(_.isString, _.toUpper)
+  test('Accept transform func', () => {
+    expect(func1('abc')).toBe('ABC')
+  })
+  test('ignore number', () => {
+    expect(func1(1)).toBe(1)
+  })
+  test('Allow non-thunk responses', () => {
+    const func = overBranch(_.isNumber, 'number')
+    expect(func('abc')).toBe('abc')
+    expect(func(1)).toBe('number')
   })
 })
