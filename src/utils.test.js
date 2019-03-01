@@ -1,5 +1,6 @@
+import _ from 'lodash/fp'
 import {
-  isEmptyArray, isEmptyString, isWorthless, rejectWorthless, subtrahend,
+  condId, isEmptyArray, isEmptyString, isWorthless, rejectWorthless, subtrahend,
 } from '.'
 
 /* globals describe test expect */
@@ -59,3 +60,24 @@ describe('isWorthless', () => {
 //   t.false(validOptions('c'), 'c')
 //   t.end()
 // })
+
+describe('condId', () => {
+  const obj = { foo: 'bar' }
+  const func = condId(
+    [_.eq(2), _.multiply(2)],
+    [_.eq(3), _.multiply(3)],
+    [_.eq(4), 'yum!'],
+    [_.eq('foo'), obj],
+  )
+  test('onTrue result of transformer', () => {
+    expect(func(2)).toBe(4)
+    expect(func(3)).toBe(9)
+  })
+  test('no match return unchanged', () => {
+    expect(func(1)).toBe(1)
+  })
+  test('allow non function option', () => {
+    expect(func(4)).toBe('yum!')
+    expect(func('foo')).toBe(obj)
+  })
+})

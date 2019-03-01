@@ -1,8 +1,7 @@
 import {
-  constant, curry, identity, isFunction,
+  curry, identity,
 } from 'lodash/fp'
-
-const getThunk = x => (isFunction(x) ? x : constant(x))
+import { getThunk } from './utils'
 
 /**
  * Passes argument to boolCheck function. If true sends same argument to `getTrue` function.

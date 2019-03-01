@@ -21,7 +21,8 @@
     "promise",
     "serial",
     "flow",
-    "composable"
+    "composable",
+    "branch"
   ],
   "author": "Kai Curry <kai@cape.io> (http://www.cape.io/)",
   "license": "ISC",

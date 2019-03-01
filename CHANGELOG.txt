@@ -2,6 +2,10 @@
 
 * Removed clean utility functions and added to `lodash-clean` package.
 
+## [1.5.1]
+
+* Enhance `condId` to work the same as `onTrue` where onTrue can be a function or not.
+
 ## [1.4.1]
 
 * Fix onTrue.

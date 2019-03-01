@@ -1,7 +1,9 @@
 import {
-  compact, concat, cond, divide, eq, flow, gt, has,
-  identity, includes, isArray, isEmpty, isNull, isString, isPlainObject,
-  lt, map, omitBy, overEvery, overSome, negate, pickBy, reject, stubTrue, subtract, trim,
+  compact, concat, cond, constant, divide, eq, flow, gt, has,
+  identity, includes, isArray, isEmpty, isFunction,
+  isNull, isString, isPlainObject,
+  lt, map, omitBy, overEvery, overSome, negate,
+  pickBy, reject, stubTrue, subtract, trim,
 } from 'lodash/fp'
 // import { concat, cond, curry, identity,  } from 'lodash/fp'
 
@@ -12,12 +14,20 @@ import {
  */
 export const callWith = (...args) => func => func(...args)
 
+export const getThunk = x => (isFunction(x) ? x : constant(x))
+export const getThunks = map(x => (isFunction(x[1]) ? x : [x[0], constant(x[1])]))
+
 /**
- * Accepts many [ifFunc, thenFunc] arguments. See _.cond() for more info.
+ * Accepts many [ifFunc, onTrue] arguments. See _.cond() for more info.
+ *   If onTrue is a function it is sent the the value like _.cond()
+ *   If onTrue is not a function the value of onTrue is returned.
  * @param  {array} conditions one or more condition arrays [ifFunc, thenFunc]
  * @return {any}            Result of found thenFunc or if no conditions found return original.
  */
-export const condId = (...conditions) => cond(concat(conditions, [[stubTrue, identity]]))
+export const condId = (...conditions) => cond(concat(
+  getThunks(conditions),
+  [[stubTrue, identity]],
+))
 
 /**
  * Returns true if sent a value that is exactly `false`.

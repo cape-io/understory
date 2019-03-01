@@ -7,26 +7,35 @@
 -   [overBranch][3]
     -   [Parameters][4]
     -   [Examples][5]
--   [callWith][6]
+-   [onTrue][6]
     -   [Parameters][7]
--   [condId][8]
-    -   [Parameters][9]
--   [isFalse][10]
-    -   [Parameters][11]
-    -   [Examples][12]
--   [isTrue][13]
+    -   [Examples][8]
+-   [callWith][9]
+    -   [Parameters][10]
+-   [condId][11]
+    -   [Parameters][12]
+-   [isFalse][13]
     -   [Parameters][14]
     -   [Examples][15]
--   [hasSize][16]
--   [isGt][17]
+-   [isZero][16]
+    -   [Parameters][17]
     -   [Examples][18]
--   [isLt][19]
-    -   [Examples][20]
--   [subtrahend][21]
-    -   [Parameters][22]
-    -   [Examples][23]
--   [forEachP][24]
-    -   [Parameters][25]
+-   [isTrue][19]
+    -   [Parameters][20]
+    -   [Examples][21]
+-   [isWorthless][22]
+    -   [Parameters][23]
+    -   [Examples][24]
+-   [hasSize][25]
+-   [isGt][26]
+    -   [Examples][27]
+-   [isLt][28]
+    -   [Examples][29]
+-   [subtrahend][30]
+    -   [Parameters][31]
+    -   [Examples][32]
+-   [forEachP][33]
+    -   [Parameters][34]
 
 ## branch
 
@@ -46,9 +55,9 @@ Passes argument to boolCheck function. If true sends same argument to `getTrue` 
 
 ### Parameters
 
--   `boolCheck` **[Function][26]** Function that check if value is true.
--   `getTrue` **[Function][26]** Optional. Get value when false.
--   `getFalse`   (optional, default `identity`)
+-   `boolCheck` **[Function][35]** Function that check if value is true.
+-   `getTrue` **[Function][35]** Get the value when true.
+-   `getFalse` **[Function][35]** Optional. Get value when false. (optional, default `identity`)
 
 ### Examples
 
@@ -56,7 +65,29 @@ Passes argument to boolCheck function. If true sends same argument to `getTrue` 
 overBranch(boolCheck, getTrue)
 ```
 
-Returns **any** Result of getTrue or getFalse.
+Returns **any** Function that accepts a value and returns result of getTrue or getFalse.
+
+## onTrue
+
+Passes argument to boolCheck function. If true sends same argument to `getTrue` function.
+
+### Parameters
+
+-   `boolCheck` **[Function][35]** Function that check if value is true.
+-   `getValue` **[Function][35]** Get the value when true.
+-   `item` **[Function][35]** The value sent to boolCheck.
+
+### Examples
+
+```javascript
+onTrue(_.isString, _.toUpper)('foo') // => 'FOO'
+```
+
+```javascript
+onTrue(_.isString, _.toUpper)(45) // => 45
+```
+
+Returns **any** Result of getValue when true or the untouched item.
 
 ## callWith
 
@@ -70,11 +101,13 @@ Returns **\[type]** [description]
 
 ## condId
 
-Accepts many [ifFunc, thenFunc] arguments. See \_.cond() for more info.
+Accepts many [ifFunc, onTrue] arguments. See _.cond() for more info.
+  If onTrue is a function it is sent the the value like _.cond()
+  If onTrue is not a function the value of onTrue is returned.
 
 ### Parameters
 
--   `conditions` **[array][27]** one or more condition arrays [ifFunc, thenFunc]
+-   `conditions` **[array][36]** one or more condition arrays [ifFunc, thenFunc]
 
 Returns **any** Result of found thenFunc or if no conditions found return original.
 
@@ -98,6 +131,26 @@ isFalse(false) // => true
 
 Returns **bool** Tells you if it is exactly false.
 
+## isZero
+
+Returns true if sent a value that is exactly 0.
+
+### Parameters
+
+-   `value` **any** Send it anything
+
+### Examples
+
+```javascript
+isZero(0.1) // => false
+```
+
+```javascript
+isZero(0) // => true
+```
+
+Returns **bool** Tells you if it is exactly zero.
+
 ## isTrue
 
 Returns true if sent a value that is exactly `false`.
@@ -118,17 +171,45 @@ isTrue(true) // => true
 
 Returns **bool** Tells you if it is exactly false.
 
+## isWorthless
+
+[isWorthless description]
+
+### Parameters
+
+-   `value` **any** 
+
+### Examples
+
+```javascript
+isWorthless({}) // => true
+```
+
+```javascript
+isWorthless([' ', null]) // => true
+```
+
+```javascript
+isWorthless(' ') // => true
+```
+
+```javascript
+isWorthless({ foo: null, bar: 0 }) // => true
+```
+
+Returns **bool** Tells you if value is empty.
+
 ## hasSize
 
 Opposite of `_.isEmpty`.
 
-Type: [Function][26]
+Type: [Function][35]
 
 ## isGt
 
 Checks to see if second arg is greater than first. See \_.lt
 
-Type: [Function][26]
+Type: [Function][35]
 
 ### Examples
 
@@ -140,7 +221,7 @@ isGt(1)(2) // => true
 
 Checks to see if second arg is less than first. See \_.gt
 
-Type: [Boolean][28]
+Type: [Boolean][37]
 
 ### Examples
 
@@ -154,8 +235,8 @@ Subtract two numbers.
 
 ### Parameters
 
--   `subtrahend` **[number][29]** A quantity/number to be subtracted from another.
--   `minuend` **[number][29]** A quantity/number from which another is to be subtracted.
+-   `subtrahend` **[number][38]** A quantity/number to be subtracted from another.
+-   `minuend` **[number][38]** A quantity/number from which another is to be subtracted.
 
 ### Examples
 
@@ -166,7 +247,7 @@ _.subtrahend(6, 8);
 // => 2
 ```
 
-Returns **[number][29]** Returns the difference.
+Returns **[number][38]** Returns the difference.
 
 ## forEachP
 
@@ -177,10 +258,10 @@ Iteratee functions may NOT exit iteration early.
 
 ### Parameters
 
--   `iteratee` **[Function][26]** The function that should process each item.
--   `collection` **[Array][27]** The iterable. Each val send to func after previous resolves.
+-   `iteratee` **[Function][35]** The function that should process each item.
+-   `collection` **[Array][36]** The iterable. Each val send to func after previous resolves.
 
-Returns **[Promise][30]** The value return value of the last promise.
+Returns **[Promise][39]** The value return value of the last promise.
 
 [1]: #branch
 
@@ -192,52 +273,70 @@ Returns **[Promise][30]** The value return value of the last promise.
 
 [5]: #examples
 
-[6]: #callwith
+[6]: #ontrue
 
 [7]: #parameters-2
 
-[8]: #condid
+[8]: #examples-1
 
-[9]: #parameters-3
+[9]: #callwith
 
-[10]: #isfalse
+[10]: #parameters-3
 
-[11]: #parameters-4
+[11]: #condid
 
-[12]: #examples-1
+[12]: #parameters-4
 
-[13]: #istrue
+[13]: #isfalse
 
 [14]: #parameters-5
 
 [15]: #examples-2
 
-[16]: #hassize
+[16]: #iszero
 
-[17]: #isgt
+[17]: #parameters-6
 
 [18]: #examples-3
 
-[19]: #islt
+[19]: #istrue
 
-[20]: #examples-4
+[20]: #parameters-7
 
-[21]: #subtrahend
+[21]: #examples-4
 
-[22]: #parameters-6
+[22]: #isworthless
 
-[23]: #examples-5
+[23]: #parameters-8
 
-[24]: #foreachp
+[24]: #examples-5
 
-[25]: #parameters-7
+[25]: #hassize
 
-[26]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[26]: #isgt
 
-[27]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[27]: #examples-6
 
-[28]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[28]: #islt
 
-[29]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[29]: #examples-7
 
-[30]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[30]: #subtrahend
+
+[31]: #parameters-9
+
+[32]: #examples-8
+
+[33]: #foreachp
+
+[34]: #parameters-10
+
+[35]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[36]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[37]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[38]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+
+[39]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
