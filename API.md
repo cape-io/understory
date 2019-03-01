@@ -55,9 +55,9 @@ Passes argument to boolCheck function. If true sends same argument to `getTrue` 
 
 ### Parameters
 
--   `boolCheck` **[Function][35]** Function that check if value is true.
--   `getTrue` **[Function][35]** Get the value when true.
--   `getFalse` **[Function][35]** Optional. Get value when false. (optional, default `identity`)
+-   `boolCheck` **([Function][35] | any)** Function that check if value is true.
+-   `getTrue` **([Function][35] | any)** Get the value when true.
+-   `getFalse` **([Function][35] | any)** Optional. Get value when false. (optional, default `identity`)
 
 ### Examples
 
@@ -73,9 +73,9 @@ Passes argument to boolCheck function. If true sends same argument to `getTrue` 
 
 ### Parameters
 
--   `boolCheck` **[Function][35]** Function that check if value is true.
--   `getValue` **[Function][35]** Get the value when true.
--   `item` **[Function][35]** The value sent to boolCheck.
+-   `boolCheck` **([Function][35] | any)** Function that check if value is true.
+-   `getValue` **([Function][35] | any)** Get the value when true.
+-   `item` **([Function][35] | any)** The value sent to boolCheck.
 
 ### Examples
 
@@ -101,13 +101,16 @@ Returns **\[type]** [description]
 
 ## condId
 
-Accepts many [ifFunc, onTrue] arguments. See _.cond() for more info.
+-   **See: onTrue if you have one condition.**
+
+Accepts many [boolCheck, onTrue] arguments. See _.cond() for more info.
+  The function or exact match to check item against.
   If onTrue is a function it is sent the the value like _.cond()
   If onTrue is not a function the value of onTrue is returned.
 
 ### Parameters
 
--   `conditions` **[array][36]** one or more condition arrays [ifFunc, thenFunc]
+-   `conditions` **[array][36]** one or more condition arrays [boolCheck, thenFunc]
 
 Returns **any** Result of found thenFunc or if no conditions found return original.
 

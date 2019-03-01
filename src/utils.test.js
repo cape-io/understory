@@ -1,6 +1,6 @@
 import _ from 'lodash/fp'
 import {
-  condId, isEmptyArray, isEmptyString, isWorthless, rejectWorthless, subtrahend,
+  condId, isEmptyArray, isEmptyString, isWorthless, oneOf, rejectWorthless, subtrahend,
 } from '.'
 
 /* globals describe test expect */
@@ -53,21 +53,22 @@ describe('isWorthless', () => {
     expect(isWorthless([{ foo: null, bar: 0 }])).toBe(true)
   })
 })
-// test('oneOf', (t) => {
-//   const validOptions = oneOf(['a', 'b'])
-//   t.true(validOptions('a'), 'a')
-//   t.true(validOptions('b'), 'b')
-//   t.false(validOptions('c'), 'c')
-//   t.end()
-// })
 
+describe('oneOf', () => {
+  const validOptions = oneOf(['a', 'b'])
+  test('checks to see if item is in an array', () => {
+    expect(validOptions('a')).toBe(true)
+    expect(validOptions('b')).toBe(true)
+    expect(validOptions('c')).toBe(false)
+  })
+})
 describe('condId', () => {
   const obj = { foo: 'bar' }
   const func = condId(
-    [_.eq(2), _.multiply(2)],
-    [_.eq(3), _.multiply(3)],
+    [2, _.multiply(2)],
+    [3, _.multiply(3)],
     [_.eq(4), 'yum!'],
-    [_.eq('foo'), obj],
+    [oneOf(['foo', 'bar']), obj],
   )
   test('onTrue result of transformer', () => {
     expect(func(2)).toBe(4)
@@ -79,5 +80,6 @@ describe('condId', () => {
   test('allow non function option', () => {
     expect(func(4)).toBe('yum!')
     expect(func('foo')).toBe(obj)
+    expect(func('bar')).toBe(obj)
   })
 })

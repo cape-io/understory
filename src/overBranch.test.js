@@ -20,6 +20,9 @@ describe('overBranch', () => {
     const func = overBranch(_.isNumber, 'number', 'not-number')
     expect(func('abc')).toBe('not-number')
     expect(func(1)).toBe('number')
+    const func2 = overBranch('foo', 'yes', 'no')
+    expect(func2('foo')).toBe('yes')
+    expect(func2('abc')).toBe('no')
   })
   test('Another Example', () => {
     const func = overBranch(_.isPlainObject, Array)

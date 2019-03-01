@@ -14,14 +14,17 @@ import {
  */
 export const callWith = (...args) => func => func(...args)
 
+export const getCheck = x => (isFunction(x) ? x : eq(x))
 export const getThunk = x => (isFunction(x) ? x : constant(x))
-export const getThunks = map(x => (isFunction(x[1]) ? x : [x[0], constant(x[1])]))
+export const getThunks = map(x => [getCheck(x[0]), getThunk(x[1])])
 
 /**
- * Accepts many [ifFunc, onTrue] arguments. See _.cond() for more info.
+ * Accepts many [boolCheck, onTrue] arguments. See _.cond() for more info.
+ *   The function or exact match to check item against.
  *   If onTrue is a function it is sent the the value like _.cond()
  *   If onTrue is not a function the value of onTrue is returned.
- * @param  {array} conditions one or more condition arrays [ifFunc, thenFunc]
+ * @see onTrue if you have one condition.
+ * @param  {array} conditions one or more condition arrays [boolCheck, thenFunc]
  * @return {any}            Result of found thenFunc or if no conditions found return original.
  */
 export const condId = (...conditions) => cond(concat(
