@@ -21,9 +21,11 @@ export const forEachP = curry((iteratee, collection) => collection.reduce(
  * @return {Promise} The value return value of the last promise.
  */
 export const mapP = curry((iteratee, collection) => collection.reduce(
+  // Spreading everything into Promise.all every time is probably _slow_?
   (chain, arg) => chain.then(vals => Promise.all([...vals, iteratee(arg)])),
   Promise.resolve([]),
 ))
+
 const reducer = (state, func) => state.then(newState => func(newState))
 export const chainP = (...fns) => fns.reduce(
   reducer,
