@@ -14,6 +14,16 @@ export const forEachP = curry((iteratee, collection) => collection.reduce(
   Promise.resolve(),
 ))
 
+/**
+ * map for Promises. Invokes iteratee in serial sequence instead of all at once.
+ * @param {Function} iteratee The function that should process each item.
+ * @param {Array} collection The iterable. Each val send to func after previous resolves.
+ * @return {Promise} The value return value of the last promise.
+ */
+export const mapP = curry((iteratee, collection) => collection.reduce(
+  (chain, arg) => chain.then(vals => Promise.all([...vals, iteratee(arg)])),
+  Promise.resolve([]),
+))
 const reducer = (state, func) => state.then(newState => func(newState))
 export const chainP = (...fns) => fns.reduce(
   reducer,
