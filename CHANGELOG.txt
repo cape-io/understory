@@ -2,6 +2,14 @@
 
 * Removed clean utility functions and added to `lodash-clean` package.
 
+## [1.7.0]
+
+* mapP()
+
+## [1.6.0]
+
+* _.eq(boolCheck) for onTrue and condId
+
 ## [1.5.1]
 
 * Enhance `condId` to work the same as `onTrue` where onTrue can be a function or not.

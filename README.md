@@ -26,9 +26,9 @@ Passes argument to boolCheck function. If true sends same argument to `getTrue` 
 
 ### Parameters
 
--   `boolCheck` **([Function][35] | any)** Function that check if value is true.
--   `getTrue` **([Function][35] | any)** Get the value when true.
--   `getFalse` **([Function][35] | any)** Optional. Get value when false. (optional, default `identity`)
+-   `boolCheck` **([Function][37] | any)** Function that check if value is true.
+-   `getTrue` **([Function][37] | any)** Get the value when true.
+-   `getFalse` **([Function][37] | any)** Optional. Get value when false. (optional, default `identity`)
 
 ### Examples
 
@@ -44,9 +44,9 @@ Passes argument to boolCheck function. If true sends same argument to `getTrue` 
 
 ### Parameters
 
--   `boolCheck` **([Function][35] | any)** Function that check if value is true.
--   `getValue` **([Function][35] | any)** Get the value when true.
--   `item` **([Function][35] | any)** The value sent to boolCheck.
+-   `boolCheck` **([Function][37] | any)** Function that check if value is true.
+-   `getValue` **([Function][37] | any)** Get the value when true.
+-   `item` **([Function][37] | any)** The value sent to boolCheck.
 
 ### Examples
 
@@ -81,7 +81,7 @@ Accepts many [boolCheck, onTrue] arguments. See _.cond() for more info.
 
 ### Parameters
 
--   `conditions` **[array][36]** one or more condition arrays [boolCheck, thenFunc]
+-   `conditions` **[array][38]** one or more condition arrays [boolCheck, thenFunc]
 
 Returns **any** Result of found thenFunc or if no conditions found return original.
 
@@ -177,13 +177,13 @@ Returns **bool** Tells you if value is empty.
 
 Opposite of `_.isEmpty`.
 
-Type: [Function][35]
+Type: [Function][37]
 
 ## isGt
 
 Checks to see if second arg is greater than first. See \_.lt
 
-Type: [Function][35]
+Type: [Function][37]
 
 ### Examples
 
@@ -195,7 +195,7 @@ isGt(1)(2) // => true
 
 Checks to see if second arg is less than first. See \_.gt
 
-Type: [Boolean][37]
+Type: [Boolean][39]
 
 ### Examples
 
@@ -209,8 +209,8 @@ Subtract two numbers.
 
 ### Parameters
 
--   `subtrahend` **[number][38]** A quantity/number to be subtracted from another.
--   `minuend` **[number][38]** A quantity/number from which another is to be subtracted.
+-   `subtrahend` **[number][40]** A quantity/number to be subtracted from another.
+-   `minuend` **[number][40]** A quantity/number from which another is to be subtracted.
 
 ### Examples
 
@@ -221,7 +221,7 @@ _.subtrahend(6, 8);
 // => 2
 ```
 
-Returns **[number][38]** Returns the difference.
+Returns **[number][40]** Returns the difference.
 
 ## forEachP
 
@@ -232,10 +232,21 @@ Iteratee functions may NOT exit iteration early.
 
 ### Parameters
 
--   `iteratee` **[Function][35]** The function that should process each item.
--   `collection` **[Array][36]** The iterable. Each val send to func after previous resolves.
+-   `iteratee` **[Function][37]** The function that should process each item.
+-   `collection` **[Array][38]** The iterable. Each val send to func after previous resolves.
 
-Returns **[Promise][39]** The value return value of the last promise.
+Returns **[Promise][41]** The value return value of the last promise.
+
+## mapP
+
+map for Promises. Invokes iteratee in serial sequence instead of all at once.
+
+### Parameters
+
+-   `iteratee` **[Function][37]** The function that should process each item.
+-   `collection` **[Array][38]** The iterable. Each val send to func after previous resolves.
+
+Returns **[Promise][41]** The value return value of the last promise.
 
 [1]: #branch
 
@@ -305,12 +316,16 @@ Returns **[Promise][39]** The value return value of the last promise.
 
 [34]: #parameters-10
 
-[35]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[35]: #mapp
 
-[36]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[36]: #parameters-11
 
-[37]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[37]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[38]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[38]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[39]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[39]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[40]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+
+[41]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
