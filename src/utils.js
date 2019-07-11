@@ -5,7 +5,6 @@ import {
   lt, map, omitBy, overEvery, overSome, negate,
   pickBy, reject, stubTrue, subtract, trim,
 } from 'lodash/fp'
-// import { concat, cond, curry, identity,  } from 'lodash/fp'
 
 /**
  * [callWith description]
@@ -107,7 +106,7 @@ export const isGt = lt
 
 /**
  * Checks to see if second arg is less than first. See _.gt
- * @type {Boolean}
+ * @type {Function}
  * @example isLt(2)(1) // => true
  */
 export const isLt = gt
@@ -132,3 +131,6 @@ export const divideBy = divide.convert({ rearg: true })
 export const subtrahend = subtract.convert({ rearg: true })
 
 export const stubNull = () => null
+
+// export const methodArgs = _.invokeArgs
+// export const titleize = flow(lowerCase, startCase)

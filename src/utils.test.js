@@ -1,6 +1,7 @@
 import _ from 'lodash/fp'
 import {
-  condId, isEmptyArray, isEmptyString, isWorthless, oneOf, rejectWorthless, subtrahend,
+  condId, isEmptyArray, isEmptyString, isWorthless,
+  oneOf, rejectWorthless, subtrahend,
 } from '.'
 
 /* globals describe test expect */
