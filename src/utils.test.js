@@ -1,7 +1,7 @@
 import _ from 'lodash/fp'
 import {
   arrayToIndex, condId, isEmptyArray, isEmptyString, isWorthless,
-  oneOf, rejectWorthless, subtrahend,
+  oneOf, rejectWorthless, subtrahend, toMapIndex,
 } from '.'
 
 /* globals describe test expect */
@@ -16,12 +16,22 @@ describe('subtrahend', () => {
 })
 
 describe('arrayToIndex', () => {
-  test('remove junk from array', () => {
+  test('create an object index', () => {
     expect(arrayToIndex(['a', 'b', 'c'])).toEqual({ a: true, b: true, c: true })
     expect(arrayToIndex(['', null, undefined])).toEqual({ '': true, null: true, undefined: true })
     expect(arrayToIndex([1, 2, 3], 1)).toEqual({ 1: 1, 2: 1, 3: 1 })
   })
 })
+describe('toMapIndex', () => {
+  test('create a map index get function', () => {
+    const inIndex = toMapIndex([1, 3, 5, 7])
+    expect(inIndex(0)).toBe(undefined)
+    expect(inIndex(2)).toBe(undefined)
+    expect(inIndex(1)).toBe(true)
+    expect(inIndex(7)).toBe(true)
+  })
+})
+
 describe('rejectWorthless', () => {
   test('remove junk from array', () => {
     expect(rejectWorthless([])).toEqual([])

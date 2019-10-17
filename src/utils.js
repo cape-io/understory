@@ -147,3 +147,7 @@ export const stubNull = () => null
 export function arrayToIndex(arr, val = true) {
   return zipObject(arr, fill(0, arr.length, val, Array(arr.length)))
 }
+export function toMapIndex(arr, val = true) {
+  const mapIndex = new Map(arr.map(key => ([key, val])))
+  return x => mapIndex.get(x)
+}
