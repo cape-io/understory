@@ -17,6 +17,7 @@ export function overBranch(boolCheck, getTrue, getFalse = identity) {
 
 /**
  * Passes argument to boolCheck function. If true sends same argument to `getTrue` function.
+ * Similar to overBranch but no getFalse option.
  * @param  {Function|any} boolCheck Function that check if value is true.
  * @param  {Function|any} getValue Get the value when true.
  * @param  {Function|any} item The value sent to boolCheck.

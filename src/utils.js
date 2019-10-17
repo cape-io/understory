@@ -1,9 +1,9 @@
 import {
-  compact, concat, cond, constant, divide, eq, flow, gt, has,
+  compact, concat, cond, constant, divide, eq, fill, flow, gt, has,
   identity, includes, isArray, isEmpty, isFunction,
   isNull, isString, isPlainObject,
   lt, map, omitBy, overEvery, overSome, negate,
-  pickBy, reject, stubTrue, subtract, trim,
+  pickBy, reject, stubTrue, subtract, trim, zipObject,
 } from 'lodash/fp'
 
 /**
@@ -12,6 +12,8 @@ import {
  * @return {[type]}      [description]
  */
 export const callWith = (...args) => func => func(...args)
+export const methodWith = (methodId, args) => item => item[methodId](...args)
+export const mapI = map.convert({ cap: false })
 
 export const getCheck = x => (isFunction(x) ? x : eq(x))
 export const getThunk = x => (isFunction(x) ? x : constant(x))
@@ -132,5 +134,16 @@ export const subtrahend = subtract.convert({ rearg: true })
 
 export const stubNull = () => null
 
+// export const splitN = split.convert({ curry: true, fixed: false })
 // export const methodArgs = _.invokeArgs
 // export const titleize = flow(lowerCase, startCase)
+
+/**
+ * Create an index with keys of arr and all values of val.
+ * @param  {array}  arr        [description]
+ * @param  {Boolean} [val=true] [description]
+ * @return {Object}             [description]
+ */
+export function arrayToIndex(arr, val = true) {
+  return zipObject(arr, fill(0, arr.length, val, Array(arr.length)))
+}

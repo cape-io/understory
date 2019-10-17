@@ -1,6 +1,6 @@
 import _ from 'lodash/fp'
 import {
-  condId, isEmptyArray, isEmptyString, isWorthless,
+  arrayToIndex, condId, isEmptyArray, isEmptyString, isWorthless,
   oneOf, rejectWorthless, subtrahend,
 } from '.'
 
@@ -15,6 +15,13 @@ describe('subtrahend', () => {
   })
 })
 
+describe('arrayToIndex', () => {
+  test('remove junk from array', () => {
+    expect(arrayToIndex(['a', 'b', 'c'])).toEqual({ a: true, b: true, c: true })
+    expect(arrayToIndex(['', null, undefined])).toEqual({ '': true, null: true, undefined: true })
+    expect(arrayToIndex([1, 2, 3], 1)).toEqual({ 1: 1, 2: 1, 3: 1 })
+  })
+})
 describe('rejectWorthless', () => {
   test('remove junk from array', () => {
     expect(rejectWorthless([])).toEqual([])
