@@ -36,7 +36,8 @@ describe('rejectWorthless', () => {
   test('remove junk from array', () => {
     expect(rejectWorthless([])).toEqual([])
     expect(rejectWorthless(['', null])).toEqual([])
-    expect(rejectWorthless([false, true, {}, [null]])).toEqual([true])
+    expect(rejectWorthless([false, true, {}, [null]]))
+      .toEqual([false, true])
   })
 })
 describe('isEmptyString', () => {
@@ -55,7 +56,7 @@ describe('isEmptyArray', () => {
 })
 describe('isWorthless', () => {
   test('bools', () => {
-    expect(isWorthless(false)).toBe(true)
+    expect(isWorthless(false)).toBe(false)
     expect(isWorthless(true)).toBe(false)
   })
   test('numbers have value', () => {
@@ -69,6 +70,12 @@ describe('isWorthless', () => {
   test('arrays', () => {
     expect(isWorthless([{}, null, []])).toBe(true)
     expect(isWorthless([{ foo: null, bar: 0 }])).toBe(true)
+  })
+  test('undefined', () => {
+    expect(isWorthless()).toBe(true)
+  })
+  test('null', () => {
+    expect(isWorthless(null)).toBe(true)
   })
 })
 

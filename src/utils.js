@@ -1,7 +1,7 @@
 import {
   compact, concat, cond, constant, divide, eq, fill, flow, gt, has,
   identity, includes, isArray, isEmpty, isFunction,
-  isNull, isString, isPlainObject,
+  isNull, isString, isPlainObject, isUndefined,
   lt, map, omitBy, overEvery, overSome, negate,
   pickBy, reject, stubTrue, subtract, trim, zipObject,
 } from 'lodash/fp'
@@ -11,13 +11,13 @@ import {
  * @param  {[type]} args [description]
  * @return {[type]}      [description]
  */
-export const callWith = (...args) => func => func(...args)
-export const methodWith = (methodId, args) => item => item[methodId](...args)
+export const callWith = (...args) => (func) => func(...args)
+export const methodWith = (methodId, args) => (item) => item[methodId](...args)
 export const mapI = map.convert({ cap: false })
 
-export const getCheck = x => (isFunction(x) ? x : eq(x))
-export const getThunk = x => (isFunction(x) ? x : constant(x))
-export const getThunks = map(x => [getCheck(x[0]), getThunk(x[1])])
+export const getCheck = (x) => (isFunction(x) ? x : eq(x))
+export const getThunk = (x) => (isFunction(x) ? x : constant(x))
+export const getThunks = map((x) => [getCheck(x[0]), getThunk(x[1])])
 
 /**
  * Accepts many [boolCheck, onTrue] arguments. See _.cond() for more info.
@@ -79,7 +79,8 @@ export const isEmptyArray = overEvery([
  * @example isWorthless({ foo: null, bar: 0 }) // => true
  */
 export const isWorthless = overSome([
-  isNull, isFalse, isZero, isEmptyString, isEmptyArray, isEmptyObject,
+  isUndefined, isNull, isZero,
+  isEmptyString, isEmptyArray, isEmptyObject,
 ])
 export const rejectWorthless = reject(isWorthless)
 
@@ -147,7 +148,13 @@ export const stubNull = () => null
 export function arrayToIndex(arr, val = true) {
   return zipObject(arr, fill(0, arr.length, val, Array(arr.length)))
 }
+export const newMap = (x) => new Map(x)
 export function toMapIndex(arr, val = true) {
-  const mapIndex = new Map(arr.map(key => ([key, val])))
-  return x => mapIndex.get(x)
+  const mapIndex = new Map(arr.map((key) => ([key, val])))
+  return (x) => mapIndex.get(x)
 }
+export const createMapIndex = (id) => flow(
+  map((x) => ([x[id], x])),
+  newMap,
+  (mapIndex) => (key) => mapIndex.get(key),
+)

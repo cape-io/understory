@@ -1,6 +1,7 @@
-## next - [2.0.0]
+## [1.10.0]
 
 * Removed clean utility functions and added to `lodash-clean` package.
+* Changed isWorthless to allow true/false to remain.
 
 ## [1.7.0]
 
