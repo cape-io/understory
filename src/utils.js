@@ -1,5 +1,5 @@
 import {
-  compact, concat, cond, constant, divide, eq, fill, flow, gt, has,
+  add, compact, concat, cond, constant, divide, eq, fill, flow, gt, has,
   identity, includes, isArray, isEmpty, isFunction,
   isNull, isString, isPlainObject, isUndefined,
   lt, map, omitBy, overEvery, overSome, negate,
@@ -132,7 +132,19 @@ export const divideBy = divide.convert({ rearg: true })
  * // => 2
  */
 export const subtrahend = subtract.convert({ rearg: true })
-
+/**
+ * Add two numbers or strings.
+ *
+ * @category Math
+ * @param {number|string} addend A quantity/number to be added to the end of another.
+ * @param {number|string} augend A quantity/number from to another is added.
+ * @returns {number} Returns the sum.
+ * @example
+ *
+ * _.addend('c')('ab');
+ * // => 'abc'
+ */
+export const addend = add.convert({ rearg: true })
 export const stubNull = () => null
 
 // export const splitN = split.convert({ curry: true, fixed: false })
