@@ -22,19 +22,19 @@ export const forEachP = curry((iteratee, collection) => collection.reduce(
  */
 export const mapP = curry((iteratee, collection) => collection.reduce(
   // Spreading everything into Promise.all every time is probably _slow_?
-  (chain, arg) => chain.then(vals => Promise.all([...vals, iteratee(arg)])),
+  (chain, arg) => chain.then((vals) => Promise.all([...vals, iteratee(arg)])),
   Promise.resolve([]),
 ))
 
-const reducer = (state, func) => state.then(newState => func(newState))
+const reducer = (state, func) => state.then((newState) => func(newState))
 export const chainP = (...fns) => fns.reduce(
   reducer,
   Promise.resolve(),
 )
-export const flowP = (...fns) => start => fns.reduce(
+export const flowP = (...fns) => (start) => fns.reduce(
   reducer,
   Promise.resolve(start),
 )
 
-export const wait = ms => new Promise(r => setTimeout(r, ms))
-export const waitFor = ms => () => wait(ms)
+export const wait = (ms) => new Promise((r) => setTimeout(r, ms))
+export const waitFor = (ms) => () => wait(ms)

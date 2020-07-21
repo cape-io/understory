@@ -12,7 +12,7 @@ import { getCheck, getThunk } from './utils'
  * @example overBranch(boolCheck, getTrue)
  */
 export function overBranch(boolCheck, getTrue, getFalse = identity) {
-  return x => (getCheck(boolCheck)(x) ? getThunk(getTrue)(x) : getThunk(getFalse)(x))
+  return (x) => (getCheck(boolCheck)(x) ? getThunk(getTrue)(x) : getThunk(getFalse)(x))
 }
 
 /**

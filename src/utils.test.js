@@ -1,7 +1,7 @@
 import _ from 'lodash/fp'
 import {
   arrayToIndex, condId, isEmptyArray, isEmptyString, isWorthless,
-  oneOf, rejectWorthless, subtrahend, toMapIndex,
+  oneOf, rejectWorthless, roundTo, subtrahend, toMapIndex,
 } from '.'
 
 /* globals describe test expect */
@@ -87,6 +87,17 @@ describe('oneOf', () => {
     expect(validOptions('c')).toBe(false)
   })
 })
+
+describe('roundTo', () => {
+  test('round to precision', () => {
+    expect(roundTo(1, 15.29)).toBe(15.3)
+    expect(roundTo(2, 15.299)).toBe(15.3)
+    expect(roundTo(2, 15.209)).toBe(15.21)
+    expect(roundTo(2, 15.201)).toBe(15.2)
+    expect(roundTo(7, 15.0123456789)).toBe(15.0123457)
+  })
+})
+
 describe('condId', () => {
   const obj = { foo: 'bar' }
   const func = condId(

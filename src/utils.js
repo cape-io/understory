@@ -1,9 +1,9 @@
 import {
-  add, compact, concat, cond, constant, divide, eq, fill, flow, gt, has,
+  add, compact, concat, cond, constant, curry, divide, eq, fill, flow, gt, has,
   identity, includes, isArray, isEmpty, isFunction,
   isNull, isString, isPlainObject, isUndefined,
   lt, map, omitBy, overEvery, overSome, negate,
-  pickBy, reject, stubTrue, subtract, trim, zipObject,
+  pickBy, reject, sortBy, stubTrue, subtract, toString, trim, zipObject,
 } from 'lodash/fp'
 
 /**
@@ -132,6 +132,7 @@ export const divideBy = divide.convert({ rearg: true })
  * // => 2
  */
 export const subtrahend = subtract.convert({ rearg: true })
+
 /**
  * Add two numbers or strings.
  *
@@ -145,11 +146,33 @@ export const subtrahend = subtract.convert({ rearg: true })
  * // => 'abc'
  */
 export const addend = add.convert({ rearg: true })
+
+/**
+ * Round number with precision.
+ *
+ * @category Math
+ * @param {number} precision The precision to round to.
+ * @param {number} number The number to round.
+ * @returns {number} Returns the rounded number.
+ * @example
+ *
+ * round(1)(14.23);
+ * // => 14.2
+ */
+export const roundTo = curry((precision, number) => {
+  // Shift with exponential notation to avoid floating-point issues.
+  let pair = (`${toString(number)}e`).split('e')
+  const value = Math.round(`${pair[0]}e${+pair[1] + precision}`)
+  pair = (`${toString(value)}e`).split('e')
+  return +(`${pair[0]}e${+pair[1] - precision}`)
+})
+
 export const stubNull = () => null
 
 // export const splitN = split.convert({ curry: true, fixed: false })
 // export const methodArgs = _.invokeArgs
 // export const titleize = flow(lowerCase, startCase)
+export const sort = sortBy(identity)
 
 /**
  * Create an index with keys of arr and all values of val.
