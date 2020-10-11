@@ -82,6 +82,13 @@ export const isWorthless = overSome([
   isUndefined, isNull, isZero,
   isEmptyString, isEmptyArray, isEmptyObject,
 ])
+
+/**
+ * If value is truthy, null, zero, or false.
+ * @param {any} value
+ * @return {bool} Tells you if arg is a value probably worth keeping.
+ */
+export const isValue = overSome([identity, isNull, isZero, isFalse])
 export const rejectWorthless = reject(isWorthless)
 
 export const cleanObject = omitBy(isWorthless)
