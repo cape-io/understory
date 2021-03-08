@@ -1,3 +1,8 @@
+## [1.13.1]
+
+* Package updates
+* roundTo() change
+
 ## [1.10.0]
 
 * Removed clean utility functions and added to `lodash-clean` package.
