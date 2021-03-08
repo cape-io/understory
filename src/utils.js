@@ -1,9 +1,10 @@
+import _round from 'lodash/round' // eslint-disable-line lodash-fp/use-fp
 import {
-  add, compact, concat, cond, constant, curry, divide, eq, fill, flow, gt, has,
+  add, compact, concat, cond, constant, curryN, divide, eq, fill, flip, flow, gt, has,
   identity, includes, isArray, isEmpty, isFunction,
   isNull, isString, isPlainObject, isUndefined,
   lt, map, omitBy, overEvery, overSome, negate,
-  pickBy, reject, sortBy, stubTrue, subtract, toString, trim, zipObject,
+  pickBy, reject, sortBy, stubTrue, subtract, trim, zipObject,
 } from 'lodash/fp'
 
 /**
@@ -105,6 +106,11 @@ export const clean = condId(
  */
 export const hasSize = negate(isEmpty)
 
+/**
+ * A curried version of _.includes without a rearg.
+ * @type {Function}
+ * @example isLt([2,3,4])(3) // => true
+ */
 export const oneOf = includes.convert({ rearg: false })
 
 /**
@@ -166,13 +172,7 @@ export const addend = add.convert({ rearg: true })
  * round(1)(14.23);
  * // => 14.2
  */
-export const roundTo = curry((precision, number) => {
-  // Shift with exponential notation to avoid floating-point issues.
-  let pair = (`${toString(number)}e`).split('e')
-  const value = Math.round(`${pair[0]}e${+pair[1] + precision}`)
-  pair = (`${toString(value)}e`).split('e')
-  return +(`${pair[0]}e${+pair[1] - precision}`)
-})
+export const roundTo = curryN(2, flip(_round))
 
 export const stubNull = () => null
 
