@@ -1,6 +1,6 @@
 {
   "name": "understory",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Composable utility functions based on lodash fp.",
   "scripts": {
     "docs": "documentation build src/index.js -f md -o API.md",
