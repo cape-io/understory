@@ -1,4 +1,6 @@
-import { curry } from 'lodash/fp'
+import _ from 'lodash/fp.js'
+
+const { curry } = _
 
 /**
  * Curried function form of a conditional ternary expression

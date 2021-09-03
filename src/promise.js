@@ -1,4 +1,6 @@
-import { curry } from 'lodash/fp'
+import _ from 'lodash/fp.js'
+
+const { curry } = _
 
 /**
  * Like _.forEach but can handle a promise generator as the iteratee.

@@ -1,7 +1,9 @@
-import {
+import _ from 'lodash/fp.js'
+import { getCheck, getThunk } from './utils.js'
+
+const {
   curry, identity,
-} from 'lodash/fp'
-import { getCheck, getThunk } from './utils'
+} = _
 
 /**
  * Passes argument to boolCheck function. If true sends same argument to `getTrue` function.

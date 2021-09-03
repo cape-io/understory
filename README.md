@@ -1,5 +1,9 @@
 # Understory
 
+**Version 2 is ESM.**
+
+Importing all of lodash/fp.js [#4296](https://github.com/lodash/lodash/issues/4296)
+
 Composable utility functions based on or inspired by [lodash](https://lodash.com/docs). For best results learn about `_.flow()` and read the [Lodash FP Guide](https://github.com/lodash/lodash/wiki/FP-Guide).
 
 Install [ESLint rules for lodash/fp](https://github.com/jfmengels/eslint-plugin-lodash-fp) by extending eslint with `plugin:lodash-fp/recommended` and including the `lodash-fp` plugin.

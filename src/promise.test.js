@@ -1,7 +1,8 @@
-import _ from 'lodash/fp'
-import { forEachP, mapP, wait } from './promise'
+import _ from 'lodash/fp.js'
+import { jest } from '@jest/globals'
+import { forEachP, mapP, wait } from './promise.js'
 
-/* globals describe jest test expect */
+/* globals describe test expect */
 
 describe('forEachP', () => {
   const items = ['a', 'b', 'c']

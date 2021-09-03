@@ -1,5 +1,5 @@
-import _ from 'lodash/fp'
-import { onTrue, overBranch } from './overBranch'
+import _ from 'lodash/fp.js'
+import { onTrue, overBranch } from './overBranch.js'
 
 /* globals describe test expect */
 describe('overBranch', () => {

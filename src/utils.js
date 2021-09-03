@@ -1,12 +1,13 @@
-import _round from 'lodash/round' // eslint-disable-line lodash-fp/use-fp
-import {
+import _round from 'lodash/round.js' // eslint-disable-line lodash-fp/use-fp
+import _ from 'lodash/fp.js'
+
+const {
   add, compact, concat, cond, constant, curryN, divide, eq, fill, flip, flow, gt, has,
   identity, includes, isArray, isEmpty, isFunction,
   isNull, isString, isPlainObject, isUndefined,
   lt, map, omitBy, overEvery, overSome, negate,
   pickBy, reject, sortBy, stubTrue, subtract, trim, zipObject,
-} from 'lodash/fp'
-
+} = _
 /**
  * [callWith description]
  * @param  {[type]} args [description]
@@ -60,7 +61,7 @@ export const isZero = eq(0)
  * @example isTrue(true) // => true
  */
 export const isTrue = eq(true)
-
+export const neq = flow(eq, negate)
 export const isEmptyString = overEvery([isString, flow(trim, isEmpty)])
 export const isEmptyObject = overEvery([isPlainObject, flow(pickBy(identity), isEmpty)])
 export const isEmptyArr = overEvery([isArray, flow(compact, isEmpty)])
@@ -95,7 +96,7 @@ export const rejectWorthless = reject(isWorthless)
 export const cleanObject = omitBy(isWorthless)
 
 export const clean = condId(
-  [isArray, flow(compact, map(clean))], // eslint-disable-line no-use-before-define
+  [isArray, flow(compact, map((x) => clean(x)))], // eslint-disable-line no-use-before-define
   [isPlainObject, cleanObject],
   [isString, trim],
 )
@@ -109,7 +110,7 @@ export const hasSize = negate(isEmpty)
 /**
  * A curried version of _.includes without a rearg.
  * @type {Function}
- * @example isLt([2,3,4])(3) // => true
+ * @example oneOf([2,3,4])(3) // => true
  */
 export const oneOf = includes.convert({ rearg: false })
 

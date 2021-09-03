@@ -1,6 +1,4 @@
-src/
 .git/
-.babelrc
 .editorconfig
 .eslintrc
 .gitignore
