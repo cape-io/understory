@@ -10,7 +10,7 @@
     "node": "^14.13.1 || >=16.0.0"
   },
   "type": "module",
-  "exports": "./src/index.js",
+  "exports": "./index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/cape-io/understory.git"
