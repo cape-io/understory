@@ -27,6 +27,7 @@ export const mapP = curry((iteratee, collection) => collection.reduce(
   (chain, arg) => chain.then((vals) => Promise.all([...vals, iteratee(arg)])),
   Promise.resolve([]),
 ))
+// const mapP = (iteratee, collection) => Promise.all(collection.map(iteratee))
 
 const reducer = (state, func) => state.then((newState) => func(newState))
 export const chainP = (...fns) => fns.reduce(
