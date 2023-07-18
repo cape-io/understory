@@ -18,9 +18,9 @@ Curried function form of a conditional ternary expression
 
 ### Parameters
 
--   `trueVal` **any** The value returned when true.
--   `falseVal` **any** The value returned when false.
--   `bool` **any** The value to check truthiness against.
+*   `trueVal` **any** The value returned when true.
+*   `falseVal` **any** The value returned when false.
+*   `bool` **any** The value to check truthiness against.
 
 Returns **any** The trueVal or falseVal depending on bool.
 
@@ -30,9 +30,9 @@ Passes argument to boolCheck function. If true sends same argument to `getTrue` 
 
 ### Parameters
 
--   `boolCheck` **([Function][37] | any)** Function that check if value is true.
--   `getTrue` **([Function][37] | any)** Get the value when true.
--   `getFalse` **([Function][37] | any)** Optional. Get value when false. (optional, default `identity`)
+*   `boolCheck` **([Function][49] | any)** Function that check if value is true.
+*   `getTrue` **([Function][49] | any)** Get the value when true.
+*   `getFalse` **([Function][49] | any)** Optional. Get value when false. (optional, default `identity`)
 
 ### Examples
 
@@ -45,12 +45,13 @@ Returns **any** Function that accepts a value and returns result of getTrue or g
 ## onTrue
 
 Passes argument to boolCheck function. If true sends same argument to `getTrue` function.
+Similar to overBranch but no getFalse option.
 
 ### Parameters
 
--   `boolCheck` **([Function][37] | any)** Function that check if value is true.
--   `getValue` **([Function][37] | any)** Get the value when true.
--   `item` **([Function][37] | any)** The value sent to boolCheck.
+*   `boolCheck` **([Function][49] | any)** Function that check if value is true.
+*   `getValue` **([Function][49] | any)** Get the value when true.
+*   `item` **([Function][49] | any)** The value sent to boolCheck.
 
 ### Examples
 
@@ -66,26 +67,26 @@ Returns **any** Result of getValue when true or the untouched item.
 
 ## callWith
 
-[callWith description]
+\[callWith description]
 
 ### Parameters
 
--   `args` **\[type]** [description]
+*   `args` **\[type]** \[description]
 
-Returns **\[type]** [description]
+Returns **\[type]** \[description]
 
 ## condId
 
--   **See: onTrue if you have one condition.**
+*   **See**: onTrue if you have one condition.
 
-Accepts many [boolCheck, onTrue] arguments. See _.cond() for more info.
-  The function or exact match to check item against.
-  If onTrue is a function it is sent the the value like _.cond()
-  If onTrue is not a function the value of onTrue is returned.
+Accepts many \[boolCheck, onTrue] arguments. See \_.cond() for more info.
+The function or exact match to check item against.
+If onTrue is a function it is sent the the value like \_.cond()
+If onTrue is not a function the value of onTrue is returned.
 
 ### Parameters
 
--   `conditions` **[array][38]** one or more condition arrays [boolCheck, thenFunc]
+*   `conditions` **[array][50]** one or more condition arrays \[boolCheck, thenFunc]
 
 Returns **any** Result of found thenFunc or if no conditions found return original.
 
@@ -95,7 +96,7 @@ Returns true if sent a value that is exactly `false`.
 
 ### Parameters
 
--   `value` **any** Send it anything
+*   `value` **any** Send it anything
 
 ### Examples
 
@@ -115,7 +116,7 @@ Returns true if sent a value that is exactly 0.
 
 ### Parameters
 
--   `value` **any** Send it anything
+*   `value` **any** Send it anything
 
 ### Examples
 
@@ -135,7 +136,7 @@ Returns true if sent a value that is exactly `false`.
 
 ### Parameters
 
--   `value` **any** Send it anything
+*   `value` **any** Send it anything
 
 ### Examples
 
@@ -151,11 +152,11 @@ Returns **bool** Tells you if it is exactly false.
 
 ## isWorthless
 
-[isWorthless description]
+\[isWorthless description]
 
 ### Parameters
 
--   `value` **any**
+*   `value` **any**&#x20;
 
 ### Examples
 
@@ -177,17 +178,39 @@ isWorthless({ foo: null, bar: 0 }) // => true
 
 Returns **bool** Tells you if value is empty.
 
+## isValue
+
+If value is truthy, null, zero, or false.
+
+### Parameters
+
+*   `value` **any**&#x20;
+
+Returns **bool** Tells you if arg is a value probably worth keeping.
+
 ## hasSize
 
 Opposite of `_.isEmpty`.
 
-Type: [Function][37]
+Type: [Function][49]
+
+## oneOf
+
+A curried version of \_.includes without a rearg.
+
+Type: [Function][49]
+
+### Examples
+
+```javascript
+oneOf([2,3,4])(3) // => true
+```
 
 ## isGt
 
 Checks to see if second arg is greater than first. See \_.lt
 
-Type: [Function][37]
+Type: [Function][49]
 
 ### Examples
 
@@ -199,7 +222,7 @@ isGt(1)(2) // => true
 
 Checks to see if second arg is less than first. See \_.gt
 
-Type: [Boolean][39]
+Type: [Function][49]
 
 ### Examples
 
@@ -213,8 +236,8 @@ Subtract two numbers.
 
 ### Parameters
 
--   `subtrahend` **[number][40]** A quantity/number to be subtracted from another.
--   `minuend` **[number][40]** A quantity/number from which another is to be subtracted.
+*   `subtrahend` **[number][51]** A quantity/number to be subtracted from another.
+*   `minuend` **[number][51]** A quantity/number from which another is to be subtracted.
 
 ### Examples
 
@@ -225,7 +248,54 @@ _.subtrahend(6, 8);
 // => 2
 ```
 
-Returns **[number][40]** Returns the difference.
+Returns **[number][51]** Returns the difference.
+
+## addend
+
+Add two numbers or strings.
+
+### Parameters
+
+*   `addend` **([number][51] | [string][52])** A quantity/number to be added to the end of another.
+*   `augend` **([number][51] | [string][52])** A quantity/number from to another is added.
+
+### Examples
+
+```javascript
+_.addend('c')('ab');
+// => 'abc'
+```
+
+Returns **[number][51]** Returns the sum.
+
+## roundTo
+
+Round number with precision.
+
+### Parameters
+
+*   `precision` **[number][51]** The precision to round to.
+*   `number` **[number][51]** The number to round.
+
+### Examples
+
+```javascript
+round(1)(14.23);
+// => 14.2
+```
+
+Returns **[number][51]** Returns the rounded number.
+
+## arrayToIndex
+
+Create an index with keys of arr and all values of val.
+
+### Parameters
+
+*   `arr` **[array][50]** \[description]
+*   `val` **[Boolean][53]** \[description] (optional, default `true`)
+
+Returns **[Object][54]** \[description]
 
 ## forEachP
 
@@ -236,10 +306,10 @@ Iteratee functions may NOT exit iteration early.
 
 ### Parameters
 
--   `iteratee` **[Function][37]** The function that should process each item.
--   `collection` **[Array][38]** The iterable. Each val send to func after previous resolves.
+*   `iteratee` **[Function][49]** The function that should process each item.
+*   `collection` **[Array][50]** The iterable. Each val send to func after previous resolves.
 
-Returns **[Promise][41]** The value return value of the last promise.
+Returns **[Promise][55]** The value return value of the last promise.
 
 ## mapP
 
@@ -247,10 +317,10 @@ map for Promises. Invokes iteratee in serial sequence instead of all at once.
 
 ### Parameters
 
--   `iteratee` **[Function][37]** The function that should process each item.
--   `collection` **[Array][38]** The iterable. Each val send to func after previous resolves.
+*   `iteratee` **[Function][49]** The function that should process each item.
+*   `collection` **[Array][50]** The iterable. Each val send to func after previous resolves.
 
-Returns **[Promise][41]** The value return value of the last promise.
+Returns **[Promise][55]** The value return value of the last promise.
 
 [1]: #branch
 
@@ -300,36 +370,64 @@ Returns **[Promise][41]** The value return value of the last promise.
 
 [24]: #examples-5
 
-[25]: #hassize
+[25]: #isvalue
 
-[26]: #isgt
+[26]: #parameters-9
 
-[27]: #examples-6
+[27]: #hassize
 
-[28]: #islt
+[28]: #oneof
 
-[29]: #examples-7
+[29]: #examples-6
 
-[30]: #subtrahend
+[30]: #isgt
 
-[31]: #parameters-9
+[31]: #examples-7
 
-[32]: #examples-8
+[32]: #islt
 
-[33]: #foreachp
+[33]: #examples-8
 
-[34]: #parameters-10
+[34]: #subtrahend
 
-[35]: #mapp
+[35]: #parameters-10
 
-[36]: #parameters-11
+[36]: #examples-9
 
-[37]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[37]: #addend
 
-[38]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[38]: #parameters-11
 
-[39]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[39]: #examples-10
 
-[40]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[40]: #roundto
 
-[41]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[41]: #parameters-12
+
+[42]: #examples-11
+
+[43]: #arraytoindex
+
+[44]: #parameters-13
+
+[45]: #foreachp
+
+[46]: #parameters-14
+
+[47]: #mapp
+
+[48]: #parameters-15
+
+[49]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[50]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[51]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+
+[52]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[53]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[54]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[55]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise

@@ -3,7 +3,7 @@
   "version": "2.0.3",
   "description": "Composable utility functions based on lodash fp.",
   "scripts": {
-    "docs": "documentation build src/index.js -f md -o API.md",
+    "docs": "documentation build index.js -f md -o API.md",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
   "engines": {
@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.6.1",
+    "documentation": "^14.0.2",
     "eslint": "^8.45.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
