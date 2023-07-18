@@ -1,4 +1,4 @@
-import { branch } from './index.js'
+import { branch } from '../index.js'
 
 /* globals describe test expect */
 describe('branch', () => {

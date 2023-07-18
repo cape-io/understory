@@ -43,4 +43,10 @@ describe('onTrue', () => {
     expect(func('abc')).toBe('abc')
     expect(func(1)).toBe('number')
   })
+  test('works with boolCheck result', () => {
+    const yep = { isTrue: 'yep' }
+    expect(
+      onTrue(_.stubTrue, yep, { isTrue: 'nope' }),
+    ).toBe(yep)
+  })
 })

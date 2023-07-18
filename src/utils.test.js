@@ -2,7 +2,7 @@ import _ from 'lodash/fp.js'
 import {
   arrayToIndex, condId, isEmptyArray, isEmptyString, isWorthless,
   oneOf, rejectWorthless, roundTo, subtrahend, toMapIndex,
-} from './index.js'
+} from '../index.js'
 
 /* globals describe test expect */
 
